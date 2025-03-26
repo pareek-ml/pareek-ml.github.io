@@ -560,6 +560,14 @@ body.offcanvas .colorlib-nav-toggle {
   position: relative;
 }
 
+.center-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  height: auto;
+}
+
 .colorlib-heading {
   font-size: 18px;
   margin-bottom: 4em;
@@ -2061,4 +2069,14 @@ body.offcanvas .colorlib-nav-toggle {
 
 .social-icon:hover {
   color: #005582;
+}
+
+.visualization-img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+}
+
+.visualization-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }

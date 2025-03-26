@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Breast Cancer Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="../css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="../css/flexslider.css">
+    <!-- Flaticons  -->
+    <link rel="stylesheet" href="../https://pareek-ml/fonts/flaticon/font/flaticon.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div id="colorlib-page">
+        <div class="container-wrap">
+            <aside id="colorlib-aside" role="complementary" class="border js-fullheight">
+                <div class="text-center">
+                    <h1 id="colorlib-logo"><a href="../index.html">Yash Pareek</a></h1>
+                </div>
+            </aside>
+
+            <div id="colorlib-main">
+                <section class="colorlib-about" data-section="breast-cancer">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="about-desc">
+                                    <img src="https://github.com/pareek-ml/breast-cancer-prediction/blob/main/misc/breast-cancer.jpg?raw=true"
+                                        alt="Breast Cancer Detection" class="center-img img-responsive"
+                                        style="width: 20%; height: auto">
+                                    <h2 class="colorlib-heading text-center">Breast Cancer Detection</h2>
+                                    <p>
+                                        This project focuses on building an end-to-end machine learning pipeline for
+                                        breast cancer detection.
+                                        Users can input a list of features in the specified format, and the model will
+                                        predict whether the tumor is benign or malignant.<a
+                                            href="https://github.com/pareek-ml/breast-cancer-prediction/tree/main"
+                                            target="_blank" class="social-icon" aria-label="GitHub">
+                                            <i class="icon-github"></i></a>
+                                    </p>
+                                    <p>
+                                        Please provide the features in the following format:
+                                        <code>
+                                            ['radius1', 'texture1', 'perimeter1', 'area1', 'smoothness1', 'compactness1', 'concavity1', 'concave_points1', 'symmetry1', 'fractal_dimension1', 'radius2', 'texture2', 'perimeter2', 'area2', 'smoothness2', 'compactness2', 'concavity2', 'concave_points2', 'symmetry2', 'fractal_dimension2', 'radius3', 'texture3', 'perimeter3', 'area3', 'smoothness3', 'compactness3', 'concavity3', 'concave_points3', 'symmetry3', 'fractal_dimension3', 'Diagnosis']
+                                        </code>
+                                    </p>
+                                    <form id="prediction-form">
+                                        <div class="form-group">
+                                            <label for="features">Enter Features:</label>
+                                            <textarea id="features" class="form-control" rows="5"
+                                                placeholder="Enter the list of features here..."></textarea>
+                                        </div>
+                                        <button type="button" id="submit-button" class="btn btn-primary">Submit</button>
+                                    </form>
+                                    <div id="result" class="mt-4">
+                                        <h4>Prediction Result:</h4>
+                                        <p id="result-text">Awaiting input...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <h3 class="colorlib-heading">Visualizations</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="https://github.com/pareek-ml/breast-cancer-prediction/blob/main/results/figures/feature_importance.png?raw=true"
+                                            alt="Feature Importance" class="img-responsive visualization-img"
+                                            style="width: 100%; height: auto">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="https://github.com/pareek-ml/breast-cancer-prediction/blob/main/results/figures/confusion_matrix.png?raw=true"
+                                            alt="Confusion Matrix" class="img-responsive visualization-img"
+                                            style="width: 100%; height: auto">
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <img src="https://github.com/pareek-ml/breast-cancer-prediction/blob/main/results/figures/feature_distribution.png?raw=true"
+                                            alt="Feature Distribution" class="img-responsive visualization-img"
+                                            style="width: 100%; height: auto">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="https://github.com/pareek-ml/breast-cancer-prediction/blob/main/results/figures/correlation_matrix.png?raw=true"
+                                            alt="Correlation Matrix" class="img-responsive visualization-img"
+                                            style="width: 100%; height: auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submit-button').addEventListener('click', function () {
+            const features = document.getElementById('features').value;
+            const resultText = document.getElementById('result-text');
+
+            try {
+                const parsedFeatures = JSON.parse(features);
+                if (!Array.isArray(parsedFeatures)) {
+                    throw new Error('Input must be a list.');
+                }
+
+                fetch('https://breast-cancer-prediction-s4t4.onrender.com/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ features: parsedFeatures })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        resultText.textContent = `Prediction: ${data.prediction}`;
+                    })
+                    .catch(error => {
+                        resultText.textContent = `Error: ${error.message}`;
+                    });
+            } catch (error) {
+                resultText.textContent = `Invalid input: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+
+</html>
