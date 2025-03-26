@@ -117,22 +117,34 @@
             const resultText = document.getElementById('result-text');
 
             try {
-                const parsedFeatures = JSON.parse(features);
+                const parsedFeatures = JSON.parse(features.trim());
                 if (!Array.isArray(parsedFeatures)) {
                     throw new Error('Input must be a list.');
                 }
 
-                fetch('https://breast-cancer-prediction-s4t4.onrender.com/predict', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ features: parsedFeatures })
-                })
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                const requestOptions = {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: JSON.stringify({ features: parsedFeatures }),
+                    redirect: "follow"
+                };
+
+                fetch("https://bcancer-f0e4gvcvhvash7g0.switzerlandnorth-01.azurewebsites.net/predict", requestOptions)
                     .then(response => response.json())
                     .then(data => {
-                        resultText.textContent = `Prediction: ${data.prediction}`;
+                        if (data.prediction && data.prediction[0] === 0) {
+                            resultText.textContent = 'Benign';
+                            resultText.style.color = 'green';
+                        } else if (data.prediction && data.prediction[0] === 1) {
+                            resultText.textContent = 'Malignant';
+                            resultText.style.color = 'red';
+                        } else {
+                            resultText.textContent = 'Unexpected result.';
+                            resultText.style.color = 'black';
+                        }
                     })
                     .catch(error => {
                         resultText.textContent = `Error: ${error.message}`;
