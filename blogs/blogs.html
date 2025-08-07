@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Blogs - Yash Pareek</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Blog posts by Yash Pareek on AI, Machine Learning, Programming, and Technology">
+    <meta name="keywords" content="AI, ML, Blog, Programming, Technology, Yash Pareek, Machine Learning">
+    <meta name="author" content="Yash Pareek">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="../css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="../css/flexslider.css">
+    <!-- Flaticons  -->
+    <link rel="stylesheet" href="../https://pareek-ml/fonts/flaticon/font/flaticon.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .blog-list {
+            margin-top: 30px;
+        }
+
+        .blog-item {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .blog-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-item h3 {
+            color: #2c98f0;
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .blog-item h3 a {
+            color: #2c98f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .blog-item h3 a:hover {
+            color: #1a7bc7;
+        }
+
+        .blog-meta {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .blog-meta .date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-meta .read-time {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-excerpt {
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .blog-tags {
+            margin-bottom: 20px;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            background: #f8f9fa;
+            color: #495057;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .read-more-btn {
+            color: #2c98f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more-btn:hover {
+            color: #1a7bc7;
+        }
+
+        .no-blogs {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .back-link {
+            margin-bottom: 30px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .page-header h1 {
+            color: #2c98f0;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            color: #6c757d;
+            font-size: 18px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="colorlib-page">
+        <div class="container-wrap">
+            <aside id="colorlib-aside-container"></aside>
+            <script>
+                fetch('../partials/sidebar.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('colorlib-aside-container').outerHTML = data;
+                    });
+            </script>
+
+            <div id="colorlib-main">
+                <section class="colorlib-about" data-section="blog">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="back-link">
+                                    <a href="../index.html" class="btn btn-outline-primary">← Back to Portfolio</a>
+                                </div>
+
+                                <div class="page-header">
+                                    <h1 class="colorlib-heading">Blog Posts</h1>
+                                    <p>Insights on AI, Machine Learning, Programming, and Technology</p>
+                                </div>
+
+                                <div class="blog-list">
+                                    <!-- Blog Post 1 -->
+                                    <article class="blog-item animate-box" data-animate-effect="fadeInUp">
+                                        <h3><a href="chatgpt-boost-code.html">Unleashing the Power of ChatGPT: Elevating
+                                                Your Coding Game with AI Assistance</a></h3>
+
+                                        <div class="blog-meta">
+                                            <span class="date">
+                                                <i class="icon-calendar"></i>
+                                                April 9, 2023
+                                            </span>
+                                            <span class="read-time">
+                                                <i class="icon-clock"></i>
+                                                4 min read
+                                            </span>
+                                        </div>
+
+                                        <div class="blog-tags">
+                                            <span class="blog-tag">ChatGPT</span>
+                                            <span class="blog-tag">AI</span>
+                                            <span class="blog-tag">Coding</span>
+                                            <span class="blog-tag">Programming</span>
+                                            <span class="blog-tag">Developer Tools</span>
+                                        </div>
+
+                                        <div class="blog-excerpt">
+                                            <p>
+                                                Discover how to leverage ChatGPT's powerful capabilities to enhance your
+                                                coding workflow. Learn about effective prompting strategies
+                                                <dotdotdot>
+                                            </p>
+                                        </div>
+
+                                        <a href="chatgpt-boost-code.html" class="read-more-btn">
+                                            Read Full Article
+                                            <i class="icon-arrow-right"></i>
+                                        </a>
+                                    </article>
+
+                                    <!-- Placeholder for future blog posts -->
+                                    <div class="text-center"
+                                        style="margin: 60px 0; padding: 40px; background: #f8f9fa; border-radius: 8px;">
+                                        <h4 style="color: #6c757d; margin-bottom: 15px;">More Posts Coming Soon</h4>
+                                        <p style="color: #6c757d; margin: 0;">
+                                            I'm working on more insightful articles about AI, Machine Learning, and
+                                            Software Development.
+                                            Follow me on <a href="https://pareek-yash.medium.com/" target="_blank"
+                                                style="color: #2c98f0;">Medium</a>
+                                            for the latest updates!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="../js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="../js/jquery.waypoints.min.js"></script>
+    <!-- Flexslider -->
+    <script src="../js/jquery.flexslider-min.js"></script>
+    <!-- Owl carousel -->
+    <script src="../js/owl.carousel.min.js"></script>
+    <!-- Counters -->
+    <script src="../js/jquery.countTo.js"></script>
+    <!-- MAIN JS -->
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
