@@ -21,6 +21,23 @@
     }
   });
 
+  /* dark/light theme toggle — dark is the default look and is left
+     untouched (no data-theme attribute); "light" is opt-in and
+     persisted in localStorage. Delegated for the same reason as above. */
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".theme-toggle")) return;
+    var isLight = document.documentElement.getAttribute("data-theme") === "light";
+    if (isLight) {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+    try {
+      localStorage.setItem("theme", isLight ? "dark" : "light");
+    } catch (err) {}
+    document.dispatchEvent(new Event("yp:theme-change"));
+  });
+
   /* scroll reveal */
   var revealEls = document.querySelectorAll(".reveal");
   if (revealEls.length) {
@@ -57,6 +74,19 @@
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var w = 0,
       h = 0;
+
+    /* colors read from the CSS custom properties (theme.css) rather
+       than hardcoded, so a palette/theme change stays centralized
+       there instead of drifting out of sync with this file */
+    var lineColor = "#2ee6ff";
+    var dotCyan = "#6ff0ff";
+    var dotPink = "#ff6ec4";
+    function refreshColors() {
+      var styles = getComputedStyle(document.documentElement);
+      lineColor = styles.getPropertyValue("--neon-cyan").trim() || lineColor;
+      dotCyan = styles.getPropertyValue("--neon-cyan-bright").trim() || dotCyan;
+      dotPink = styles.getPropertyValue("--neon-pink-bright").trim() || dotPink;
+    }
 
     function resize() {
       w = wrap.clientWidth;
@@ -108,31 +138,36 @@
       });
 
       ctx.lineWidth = 1;
+      ctx.strokeStyle = lineColor;
       points.forEach(function (p) {
         var ns = neighborsOf(p, points);
         ns.forEach(function (n) {
           var alpha = Math.max(0, 1 - n.d * 2.4) * 0.18;
           if (alpha <= 0.005) return;
-          ctx.strokeStyle = "rgba(46, 230, 255, " + alpha + ")";
+          ctx.globalAlpha = alpha;
           ctx.beginPath();
           ctx.moveTo(p.x * w, p.y * h);
           ctx.lineTo(n.q.x * w, n.q.y * h);
           ctx.stroke();
         });
       });
+      ctx.globalAlpha = 1;
 
       points.forEach(function (p) {
         ctx.beginPath();
-        ctx.fillStyle = p.teal ? "rgba(111, 240, 255, 0.85)" : "rgba(255, 110, 196, 0.85)";
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = p.teal ? dotCyan : dotPink;
         ctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
         ctx.fill();
       });
+      ctx.globalAlpha = 1;
 
       if (!reduceMotion) {
         window.requestAnimationFrame(frame);
       }
     }
 
+    refreshColors();
     resize();
     seed();
     frame();
@@ -144,5 +179,7 @@
         resize();
       }, 150);
     });
+
+    document.addEventListener("yp:theme-change", refreshColors);
   }
 })();

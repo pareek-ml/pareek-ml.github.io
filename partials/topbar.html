@@ -1,17 +1,28 @@
 <header class="topbar">
     <div class="topbar-inner">
         <a href="../index.html" class="brand">yash<span class="dot">.</span>pareek</a>
-        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <path d="M3 6h18M3 12h18M3 18h18" />
-            </svg>
-        </button>
-        <ul class="nav-links">
-            <li><a href="../index.html#overview">overview</a></li>
-            <li><a href="../index.html#projects">projects</a></li>
-            <li><a href="../index.html#experience">experience</a></li>
-            <li><a href="../blogs/blogs.html">blogs</a></li>
-            <li><a href="../index.html#contact">contact</a></li>
-        </ul>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="../index.html#overview">overview</a></li>
+                <li><a href="../index.html#projects">projects</a></li>
+                <li><a href="../index.html#experience">experience</a></li>
+                <li><a href="../blogs/blogs.html">blogs</a></li>
+                <li><a href="../index.html#contact">contact</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Toggle dark/light theme" type="button">
+                <svg class="theme-toggle-icon theme-toggle-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+                </svg>
+                <svg class="theme-toggle-icon theme-toggle-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                </svg>
+            </button>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+            </button>
+        </div>
     </div>
 </header>
