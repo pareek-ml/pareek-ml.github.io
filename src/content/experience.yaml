@@ -3,13 +3,26 @@ items:
     employer: World Trade Organisation
     role: AI Engineer
     location: Geneva, CH
-    dates: Mar 2026 – present
+    dates: Sep 2026 – present
     url: https://www.wto.org/
-    impact: Designed a hybrid-RAG classification tool reaching 73.6% top-1 accuracy across 10,000+ regulatory codes.
+    impact: Productionized a multi-agent trade-measure surveillance system across 16+ sources, freeing ~2 FTE/month.
     details:
-      - Designed an AI classification tool using hybrid RAG (BM25 + semantic search, RRF fusion), achieving 73.6% top-1 accuracy across 10,000+ regulatory codes at <$0.01/query, with structured outputs and confidence-threshold routing for reliability.
-      - Built an agentic trade-policy surveillance system using MCP, Google ADK and LLM APIs — automating a fully manual cross-jurisdictional monitoring workflow across 7+ government sources and 6 countries, served with FastAPI.
-      - Benchmarked on-prem deployments of Gemma 3 and Qwen 3.5 models on T4 GPUs to document metrics (tokens/sec, TTFT, TTSL, request latency, and req/sec).
+      - "Productionized a multi-agent trade-measure surveillance system with department heads and trade analysts. Scaled it from 7 to 16+ sources; hash-based deduplication cut LLM tokens by 17% and frees ~2 FTE/month."
+      - "Shipped an HS code recommender for member governments (RAG, versioned HS 2022 index): MRR@5 0.95, recall@5 0.97, <3 s latency, ready for future HS revisions."
+      - "Sovereign on-premises AI stack (vLLM embedding and reranking, Weaviate, MinIO). No inference outside the tenant boundary."
+      - "Instituted organization-wide AI governance (Langfuse observability, guardrails): 100% of traces logged across all AI applications."
+      - "Deployed an agentic RAG assistant for internal teams over 5,400+ documents: user-scoped access, metadata filtering, hybrid lexical-semantic retrieval, length-calibrated ranking."
+  - id: wto-intern
+    employer: World Trade Organisation
+    role: Intern
+    location: Geneva, CH
+    dates: Mar 2026 – Sep 2026
+    url: https://www.wto.org/
+    impact: Engineered a hybrid RAG classifier reaching 73.6% top-1 accuracy across 10,000+ regulatory codes.
+    details:
+      - "Prototyped agentic trade-policy surveillance (MCP, Google ADK, FastAPI), automating a fully manual workflow across 7 sources in 6 jurisdictions. Later productionized."
+      - "Engineered a hybrid RAG classifier (BM25 + dense retrieval, RRF) over 10,000+ regulatory codes: 73.6% top-1 at <$0.01/query, with confidence-gated human review."
+      - "Benchmarked Gemma and Qwen models on on-premises GPUs (throughput, TTFT, ITL), for production system."
   - id: perimattic
     employer: Perimattic Inc.
     role: AI Engineer
