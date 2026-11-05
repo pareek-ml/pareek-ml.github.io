@@ -1,0 +1,204 @@
+# Keep the fields here in step with the zod schemas in src/content.config.ts.
+backend:
+  name: github
+  repo: pareek-ml/pareek-ml.github.io
+  branch: main
+  # Uncomment after deploying the auth worker (see README, "GitHub sign-in for /admin").
+  # Until then, use "Sign In Using Access Token" on the login screen.
+  # base_url: https://sveltia-cms-auth.<SUBDOMAIN>.workers.dev
+
+media_folder: public/images
+public_folder: /images
+
+site_url: https://ypareek.ch
+
+output:
+  omit_empty_optional_fields: true
+
+collections:
+  - name: work
+    label: Case studies
+    label_singular: Case study
+    folder: src/content/work
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    media_folder: /src/assets/work
+    public_folder: ../../assets/work
+    sortable_fields: [order, title]
+    summary: "{{order}}. {{title}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: client, label: Client, widget: string, hint: "Anonymize freely, e.g. 'European logistics group'." }
+      - { name: sector, label: Sector, widget: string }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: summary, label: One-line summary, widget: string }
+      - name: metrics
+        label: Metrics
+        widget: list
+        required: false
+        hint: Cards show the first two.
+        fields:
+          - { name: value, label: Value, widget: string }
+          - { name: label, label: Label, widget: string }
+      - { name: order, label: Order, widget: number, value_type: int }
+      - { name: featured, label: Featured on home, widget: boolean, default: false, required: false }
+      - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+      - name: links
+        label: Links
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: Label, widget: string }
+          - { name: url, label: URL, widget: string }
+      - name: exhibit
+        label: Business exhibit
+        widget: object
+        required: false
+        fields:
+          - { name: image, label: Image, widget: image, required: false }
+          - { name: alt, label: Alt text, widget: string, required: false }
+          - { name: caption, label: Caption, widget: string, hint: "Starts with TODO until the image exists. The figure stays hidden until it has an image." }
+      - name: architecture
+        label: Architecture diagram
+        widget: object
+        required: false
+        fields:
+          - { name: image, label: Image, widget: image, required: false }
+          - { name: alt, label: Alt text, widget: string, required: false }
+          - { name: caption, label: Caption, widget: string, hint: "Starts with TODO until the image exists. The figure stays hidden until it has an image." }
+      - name: body
+        label: Body
+        widget: markdown
+        default: |
+          ## Context
+
+          ## Challenge
+
+          ## Approach
+
+          ## Impact
+
+          ## Architecture
+
+          ## What I'd do next
+        hint: Remove any section you have nothing to say about.
+
+  - name: writing
+    label: Writing
+    label_singular: Post
+    folder: src/content/writing
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    media_folder: /src/assets/writing
+    public_folder: ../../assets/writing
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, time_format: false, date_format: YYYY-MM-DD }
+      - { name: summary, label: Summary, widget: text }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: draft, label: Draft, widget: boolean, default: false, required: false }
+      - { name: external_url, label: External URL, widget: string, required: false, hint: "Link to the Medium original. A post with an empty body links straight here." }
+      - { name: body, label: Body, widget: markdown, required: false }
+
+  - name: pages
+    label: Site content
+    files:
+      - name: site
+        label: Site settings
+        file: src/content/site.yaml
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: role, label: Role line, widget: string }
+          - { name: eyebrow, label: Hero eyebrow, widget: string }
+          - { name: headline, label: Headline, widget: string }
+          - { name: subheadline, label: Subheadline, widget: string }
+          - { name: description, label: Search description, widget: text }
+          - { name: location, label: Location, widget: string }
+          - name: proof_metrics
+            label: Proof metrics
+            widget: list
+            min: 3
+            max: 3
+            fields:
+              - { name: value, label: Value, widget: string }
+              - { name: label, label: Label, widget: string }
+          - { name: email, label: Email, widget: string }
+          - name: socials
+            label: Socials
+            widget: list
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: url, label: URL, widget: string }
+          - { name: cv, label: CV, widget: file, media_folder: /public/files, public_folder: /files }
+      - name: about
+        label: About
+        file: src/content/about.md
+        fields:
+          - { name: status, label: Status line, widget: string }
+          - { name: body, label: Body, widget: markdown }
+      - name: experience
+        label: Experience
+        file: src/content/experience.yaml
+        fields:
+          - name: items
+            label: Roles
+            label_singular: Role
+            widget: list
+            summary: "{{fields.employer}}, {{fields.role}}"
+            hint: Listed in the order shown here.
+            fields:
+              - { name: id, label: ID, widget: string, hint: "Short and unique, e.g. wto." }
+              - { name: employer, label: Employer, widget: string }
+              - { name: role, label: Role, widget: string }
+              - { name: location, label: Location, widget: string }
+              - { name: dates, label: Dates, widget: string }
+              - { name: url, label: URL, widget: string, required: false }
+              - { name: impact, label: One-line impact, widget: string }
+              - { name: details, label: Detail bullets, widget: list }
+      - name: education
+        label: Education
+        file: src/content/education.yaml
+        fields:
+          - name: items
+            label: Degrees
+            label_singular: Degree
+            widget: list
+            summary: "{{fields.degree}}"
+            fields:
+              - { name: id, label: ID, widget: string, hint: "Short and unique, e.g. usi." }
+              - { name: degree, label: Degree, widget: string }
+              - { name: institution, label: Institution, widget: string }
+              - { name: dates, label: Dates, widget: string }
+              - { name: notes, label: Notes, widget: list }
+      - name: capabilities
+        label: Capabilities
+        file: src/content/capabilities.yaml
+        fields:
+          - name: items
+            label: Columns
+            label_singular: Column
+            widget: list
+            summary: "{{fields.title}}"
+            max: 3
+            fields:
+              - { name: id, label: ID, widget: string, hint: "Short and unique, e.g. strategy." }
+              - { name: title, label: Title, widget: string }
+              - { name: lines, label: Lines, widget: list }
+      - name: approach
+        label: Approach
+        file: src/content/approach.yaml
+        fields:
+          - name: items
+            label: Steps
+            label_singular: Step
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: ID, widget: string, hint: "Short and unique, e.g. diagnose." }
+              - { name: title, label: Title, widget: string }
+              - { name: outcome, label: What the client gets, widget: string }

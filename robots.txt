@@ -1,4 +1,0 @@
-Sitemap: https://pareek-ml.github.io/sitemap.xml
-
-User-agent: *
-Disallow:

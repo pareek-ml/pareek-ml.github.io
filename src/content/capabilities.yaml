@@ -1,0 +1,23 @@
+items:
+  - id: strategy
+    title: Strategy
+    lines:
+      - Enterprise AI agents and workflow automation in sensitive environments
+      - Demand forecasting and dynamic pricing
+      - On-premise LLM benchmarking with AIPerf
+      - End-user training, handoff and adoption
+  - id: engineering
+    title: Engineering
+    lines:
+      - LLM APIs, RAG pipelines, LLM fine-tuning, MCP and Google ADK
+      - PyTorch, JAX, HuggingFace Transformers, LangChain, LangGraph and vLLM
+      - Chroma, Qdrant, BM25, semantic search, SQL Server and Databricks
+      - Docker, Kubernetes, GitHub Actions (CI/CD), REST APIs, FastAPI, Git and on-premise deployment
+      - Python, C++, SQL and TypeScript
+  - id: governance
+    title: Governance
+    lines:
+      - EU AI Act, GDPR, DLP policies and data residency
+      - LLM evaluation with DeepEval and RAGAS
+      - MLOps with MLflow, Weights & Biases and Grafana
+      - Drift monitoring and selective retraining

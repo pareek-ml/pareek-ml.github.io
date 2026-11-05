@@ -1,0 +1,34 @@
+items:
+  - id: wto
+    employer: World Trade Organisation
+    role: AI Engineer
+    location: Geneva, CH
+    dates: Mar 2026 – present
+    url: https://www.wto.org/
+    impact: Designed a hybrid-RAG classification tool reaching 73.6% top-1 accuracy across 10,000+ regulatory codes.
+    details:
+      - Designed an AI classification tool using hybrid RAG (BM25 + semantic search, RRF fusion), achieving 73.6% top-1 accuracy across 10,000+ regulatory codes at <$0.01/query, with structured outputs and confidence-threshold routing for reliability.
+      - Built an agentic trade-policy surveillance system using MCP, Google ADK and LLM APIs — automating a fully manual cross-jurisdictional monitoring workflow across 7+ government sources and 6 countries, served with FastAPI.
+      - Benchmarked on-prem deployments of Gemma 3 and Qwen 3.5 models on T4 GPUs to document metrics (tokens/sec, TTFT, TTSL, request latency, and req/sec).
+  - id: perimattic
+    employer: Perimattic Inc.
+    role: AI Engineer
+    location: Bengaluru
+    dates: Jan 2023 – Aug 2024
+    url: https://perimattic.com/
+    impact: Deployed conversational agentic AI handling 1M+ airport travellers at 99.95% uptime.
+    details:
+      - Designed and deployed conversational agentic AI systems with a LangChain pipeline handling 1M+ airport travellers, integrating with legacy backend and cloud-native deployment at 99.95% uptime.
+      - Built enterprise AI agents on Google AI Studio grounded in Docs and SharePoint document corpora, enabling non-technical business users to query internal knowledge bases through natural language — driving measurable adoption across client operations.
+      - Contributed to the AI evaluation framework by integrating DeepEval into LLM-based solutions and regression testing in ML deployments, and built automatic feedback loops by observing production logs.
+      - Built and deployed per-facility demand forecasting models (Facebook Prophet) for airport parking utilization across multiple facilities for a UK parking operator — enabling a dynamic pricing strategy that contributed to 15% revenue growth. Implemented automated drift monitoring to detect degradation and trigger selective retraining, with MLflow for model versioning.
+      - "Supported end-user training and adoption: documented workflows, facilitated handoff sessions, and upskilled business teams to operate and iterate on deployed AI agents independently."
+  - id: freelance
+    employer: Freelance
+    role: Junior AI Engineer
+    location: Jaipur
+    dates: Mar 2022 – Jul 2023
+    impact: Architected a custom RAG solution with 95% hallucination reduction and full GDPR compliance.
+    details:
+      - Architected a custom RAG solution (Qdrant vector DB) with containerised LLM inference via Docker — 95% hallucination reduction with enterprise-only docs, 99.95% uptime, full GDPR compliance.
+      - Built a real-time computer vision system (YOLO) for automated vehicle number plate detection at an airport — reducing processing time from ~60s (manual lookup) to <5s (12× improvement).

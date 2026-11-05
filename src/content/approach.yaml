@@ -1,0 +1,13 @@
+items:
+  - id: diagnose
+    title: Diagnose
+    outcome: A ranked view of the workflows where AI will pay back, and where it won't.
+  - id: design
+    title: Design
+    outcome: An architecture, evaluation plan and governance approach your risk team can review.
+  - id: build
+    title: Build
+    outcome: A production system on your infrastructure, tested against your own data.
+  - id: scale
+    title: Scale
+    outcome: Monitoring, retraining and training so your team can run it independently.

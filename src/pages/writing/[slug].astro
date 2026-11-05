@@ -1,0 +1,44 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate, getPosts, getSite, hasPage } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = (await getPosts()).filter(hasPage);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, date, summary, tags, external_url } = post.data;
+const site = await getSite();
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const words = post.body?.trim().split(/\s+/).length ?? 0;
+const minutes = Math.max(1, Math.round(words / 200));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  datePublished: date.toISOString().slice(0, 10),
+  author: { '@type': 'Person', name: site.name, url: 'https://ypareek.ch/' },
+  mainEntityOfPage: canonical,
+};
+---
+<Base title={title} description={summary} ogType="article" jsonLd={jsonLd}>
+  <article>
+    <header class="wrap page-head">
+      <p class="page-kicker">
+        <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>, {minutes} min read
+      </p>
+      <h1 class="page-title">{title}</h1>
+    </header>
+    <div class="wrap page-body">
+      <div class="prose"><Content /></div>
+      <footer class="post-foot">
+        {tags.length > 0 && <ul class="tags">{tags.map((tag) => <li>{tag}</li>)}</ul>}
+        {external_url && <a class="link link--on" href={external_url} rel="noopener">Read the original on Medium</a>}
+      </footer>
+    </div>
+  </article>
+</Base>
