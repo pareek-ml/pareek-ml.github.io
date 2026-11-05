@@ -29,19 +29,17 @@ items:
     location: Bengaluru
     dates: Jan 2023 – Aug 2024
     url: https://perimattic.com/
-    impact: Deployed conversational agentic AI handling 1M+ airport travellers at 99.95% uptime.
+    impact: Deployed conversational AI agents serving 1M+ airport travellers at 99.95% uptime.
     details:
-      - Designed and deployed conversational agentic AI systems with a LangChain pipeline handling 1M+ airport travellers, integrating with legacy backend and cloud-native deployment at 99.95% uptime.
-      - Built enterprise AI agents on Google AI Studio grounded in Docs and SharePoint document corpora, enabling non-technical business users to query internal knowledge bases through natural language — driving measurable adoption across client operations.
-      - Contributed to the AI evaluation framework by integrating DeepEval into LLM-based solutions and regression testing in ML deployments, and built automatic feedback loops by observing production logs.
-      - Built and deployed per-facility demand forecasting models (Facebook Prophet) for airport parking utilization across multiple facilities for a UK parking operator — enabling a dynamic pricing strategy that contributed to 15% revenue growth. Implemented automated drift monitoring to detect degradation and trigger selective retraining, with MLflow for model versioning.
-      - "Supported end-user training and adoption: documented workflows, facilitated handoff sessions, and upskilled business teams to operate and iterate on deployed AI agents independently."
+      - "Deployed conversational AI agents (LangChain) serving 1M+ airport travellers. Integrated with legacy backends at 99.95% uptime."
+      - "Delivered enterprise knowledge agents grounded in Google Docs and SharePoint, giving non-technical users natural-language access to internal knowledge."
+      - "Built an LLM evaluation framework (DeepEval) with regression gates on ML deployments."
+      - "Forecast parking utilization (Prophet) for a UK airport parking operator. The forecasts underpinned dynamic pricing, contributing to 15% revenue growth."
   - id: freelance
     employer: Freelance
     role: Junior AI Engineer
     location: Jaipur
     dates: Mar 2022 – Jul 2023
-    impact: Architected a custom RAG solution with 95% hallucination reduction and full GDPR compliance.
+    impact: Cut airport plate-recognition processing from ~60 s to <5 s.
     details:
-      - Architected a custom RAG solution (Qdrant vector DB) with containerised LLM inference via Docker — 95% hallucination reduction with enterprise-only docs, 99.95% uptime, full GDPR compliance.
-      - Built a real-time computer vision system (YOLO) for automated vehicle number plate detection at an airport — reducing processing time from ~60s (manual lookup) to <5s (12× improvement).
+      - "Built real-time YOLO plate recognition for an airport, cutting processing from ~60 s to <5 s (12×)."
