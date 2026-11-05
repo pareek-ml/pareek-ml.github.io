@@ -1,0 +1,25 @@
+name: Yash Pareek
+role: AI Engineer
+eyebrow: Enterprise AI · Geneva
+headline: Enterprise AI that holds up in production, and in an audit.
+subheadline: AI engineer at the World Trade Organization. I scope problems with the people who own them, build multi-agent and retrieval systems on sovereign infrastructure, and put the governance in place to run them responsibly.
+description: AI Engineer building enterprise AI agents, RAG pipelines, and workflow automation. Currently at the World Trade Organisation, Geneva.
+location: Geneva, Switzerland
+proof_metrics:
+  - value: "~2 FTE"
+    label: of analyst effort freed every month
+  - value: 100%
+    label: of AI traces logged and auditable
+  - value: "0.97"
+    label: recall@5 on HS code recommendation
+email: ml.ypareek@gmail.com
+socials:
+  - label: LinkedIn
+    url: https://www.linkedin.com/in/pareek-yash
+  - label: GitHub
+    url: https://github.com/pareek-ml
+  - label: Medium
+    url: https://medium.com/@pareek-yash
+  - label: Kaggle
+    url: https://www.kaggle.com/yashpareek
+cv: /files/cv.pdf

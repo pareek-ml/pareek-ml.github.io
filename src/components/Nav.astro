@@ -1,0 +1,25 @@
+---
+import { getSite } from '../lib/content';
+const site = await getSite();
+const path = Astro.url.pathname;
+const links = [
+  { label: 'Work', href: '/work/' },
+  { label: 'Writing', href: '/writing/' },
+  { label: 'Approach', href: '/#approach' },
+  { label: 'About', href: '/about/' },
+];
+---
+<header class="site-header">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="wrap nav" aria-label="Main">
+    <a class="nav-name" href="/">{site.name}</a>
+    <ul class="nav-links">
+      {links.map(({ label, href }) => (
+        <li>
+          <a class="link" href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a>
+        </li>
+      ))}
+    </ul>
+    <a class="btn btn--solid" href="/#contact">Get in touch</a>
+  </nav>
+</header>

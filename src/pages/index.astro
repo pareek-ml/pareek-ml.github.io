@@ -1,0 +1,154 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import NeighborField from '../components/NeighborField.astro';
+import PostRow from '../components/PostRow.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { getOrdered, getPosts, getSite, getWork } from '../lib/content';
+
+const site = await getSite();
+const featured = (await getWork()).filter((entry) => entry.data.featured);
+const posts = (await getPosts()).slice(0, 3);
+const steps = await getOrdered('approach');
+const jobs = await getOrdered('experience');
+const capabilities = await getOrdered('capabilities');
+const linkedIn = site.socials.find((social) => social.label === 'LinkedIn');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: 'https://ypareek.ch/',
+  image: 'https://ypareek.ch/og.png',
+  jobTitle: site.role,
+  description: site.description,
+  worksFor: { '@type': 'Organization', name: 'World Trade Organization', url: 'https://www.wto.org/' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Università della Svizzera Italiana' },
+    { '@type': 'CollegeOrUniversity', name: 'Rajasthan Technical University' },
+  ],
+  email: `mailto:${site.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Geneva', addressCountry: 'CH' },
+  sameAs: site.socials.map((social) => social.url),
+};
+---
+<Base ogType="profile" jsonLd={jsonLd}>
+  <section class="hero">
+    <div class="wrap grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{site.eyebrow}</p>
+        <h1>{site.headline}</h1>
+        <p class="hero-sub">{site.subheadline}</p>
+        <div class="cta">
+          <a class="btn btn--solid" href="/work/">View work</a>
+          <a class="btn btn--line" href={site.cv} download>Download CV</a>
+        </div>
+      </div>
+      <NeighborField />
+    </div>
+  </section>
+
+  <section class="proof" aria-label="Selected results">
+    <dl class="wrap proof-list">
+      {site.proof_metrics.map(({ value, label }) => (
+        <div class="proof-item">
+          <dt class="proof-label">{label}</dt>
+          <dd class="proof-value">{value}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2 class="section-title">Selected work</h2>
+        <a class="arrow-link" href="/work/"><span class="link">All work</span><Arrow /></a>
+      </div>
+      <div class="work-grid">
+        {featured.map((entry) => <WorkCard entry={entry} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="approach">
+    <div class="wrap">
+      <div class="section-head reveal"><h2 class="section-title">Approach</h2></div>
+      <ol class="steps reveal">
+        {steps.map(({ data }) => (
+          <li class="step">
+            <h3>{data.title}</h3>
+            <p>{data.outcome}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="writing">
+    <div class="wrap grid">
+      <div class="split-side sticky reveal">
+        <h2 class="section-title">Writing</h2>
+      </div>
+      <div class="split-main reveal">
+        <div class="posts">
+          {posts.map((post) => <PostRow post={post} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="wrap grid">
+      <div class="split-side sticky reveal">
+        <h2 class="section-title">Experience</h2>
+      </div>
+      <div class="split-main timeline reveal">
+        {jobs.map(({ data }) => (
+          <details class="job">
+            <summary>
+              <div>
+                <div class="job-head">
+                  <h3 class="job-employer">{data.employer}</h3>
+                  <span class="job-dates">{data.dates}</span>
+                </div>
+                <p class="job-role">{data.role}, {data.location}</p>
+                <p class="job-impact">{data.impact}</p>
+              </div>
+              <span class="job-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="job-detail">
+              <ul>{data.details.map((line) => <li>{line}</li>)}</ul>
+              {data.url && <p><a class="link link--on" href={data.url} rel="noopener">Visit {data.employer}</a></p>}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="capabilities">
+    <div class="wrap">
+      <div class="section-head reveal"><h2 class="section-title">Capabilities</h2></div>
+      <div class="cap-columns reveal">
+        {capabilities.map(({ data }) => (
+          <div>
+            <h3>{data.title}</h3>
+            <ul>{data.lines.map((line) => <li>{line}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap reveal">
+      <h2 class="contact-title">Let's talk.</h2>
+      <p class="contact-lede">The fastest way to reach me is email. I read everything and reply quickly.</p>
+      <ul class="contact-links">
+        <li><a class="link link--on" href={`mailto:${site.email}`}>{site.email}</a></li>
+        {linkedIn && <li><a class="link link--on" href={linkedIn.url} rel="me noopener">LinkedIn</a></li>}
+      </ul>
+    </div>
+  </section>
+</Base>

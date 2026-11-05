@@ -1,0 +1,71 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CaseFigure from '../../components/CaseFigure.astro';
+import { getWork } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const work = await getWork();
+  return work.map((entry, index) => ({
+    params: { slug: entry.id },
+    props: { entry, previous: work[index - 1], next: work[index + 1] },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const { Content } = await render(entry);
+const { title, client, sector, tags, summary, metrics, links, exhibit, architecture } = entry.data;
+---
+<Base title={title} description={summary} ogType="article">
+  <article>
+    <header class="wrap page-head">
+      <p class="page-kicker">{sector}</p>
+      <h1 class="page-title">{title}</h1>
+      <p class="case-summary">{summary}</p>
+    </header>
+    {metrics.length > 0 && (
+      <div class="wrap">
+        <dl class="metric-row">
+          {metrics.map(({ value, label }) => (
+            <div><dt>{label}</dt><dd>{value}</dd></div>
+          ))}
+        </dl>
+      </div>
+    )}
+    <div class="wrap grid case-layout">
+      <aside class="case-side sticky">
+        <dl class="facts">
+          <div><dt>Client</dt><dd>{client}</dd></div>
+          {tags.length > 0 && <div><dt>Focus</dt><dd>{tags.join(', ')}</dd></div>}
+          {links.length > 0 && (
+            <div>
+              <dt>Links</dt>
+              <dd>{links.map(({ label, url }) => <a class="link link--on" href={url} rel="noopener">{label}</a>)}</dd>
+            </div>
+          )}
+        </dl>
+      </aside>
+      <div class="case-main">
+        <CaseFigure kind="Business exhibit" figure={exhibit} />
+        <div class="prose"><Content /></div>
+        <CaseFigure kind="Architecture diagram" figure={architecture} />
+      </div>
+    </div>
+  </article>
+  <nav class="wrap" aria-label="Case studies">
+    <div class="pager">
+      {previous && (
+        <a href={`/work/${previous.id}/`} rel="prev">
+          <span class="pager-label">Previous</span>
+          <span class="pager-title">{previous.data.title}</span>
+        </a>
+      )}
+      {next && (
+        <a class="pager-next" href={`/work/${next.id}/`} rel="next">
+          <span class="pager-label">Next</span>
+          <span class="pager-title">{next.data.title}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+</Base>

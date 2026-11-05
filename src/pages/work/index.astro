@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { getWork } from '../../lib/content';
+
+const work = await getWork();
+---
+<Base title="Work" description="Case studies in enterprise AI agents, RAG pipelines, model infrastructure and applied machine learning.">
+  <div class="wrap page-head">
+    <h1 class="page-title">Work</h1>
+  </div>
+  <div class="wrap page-body">
+    <div class="work-grid">
+      {work.map((entry) => <WorkCard entry={entry} level="h2" />)}
+    </div>
+  </div>
+</Base>

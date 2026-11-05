@@ -1,0 +1,45 @@
+items:
+  - id: wto
+    employer: World Trade Organisation
+    role: AI Engineer
+    location: Geneva, CH
+    dates: Sep 2026 – present
+    url: https://www.wto.org/
+    impact: Productionized a multi-agent trade-measure surveillance system across 16+ sources, freeing ~2 FTE/month.
+    details:
+      - "Productionized a multi-agent trade-measure surveillance system with department heads and trade analysts. Scaled it from 7 to 16+ sources; hash-based deduplication cut LLM tokens by 17% and frees ~2 FTE/month."
+      - "Shipped an HS code recommender for member governments (RAG, versioned HS 2022 index): MRR@5 0.95, recall@5 0.97, <3 s latency, ready for future HS revisions."
+      - "Sovereign on-premises AI stack (vLLM embedding and reranking, Weaviate, MinIO). No inference outside the tenant boundary."
+      - "Instituted organization-wide AI governance (Langfuse observability, guardrails): 100% of traces logged across all AI applications."
+      - "Deployed an agentic RAG assistant for internal teams over 5,400+ documents: user-scoped access, metadata filtering, hybrid lexical-semantic retrieval, length-calibrated ranking."
+  - id: wto-intern
+    employer: World Trade Organisation
+    role: Intern
+    location: Geneva, CH
+    dates: Mar 2026 – Sep 2026
+    url: https://www.wto.org/
+    impact: Engineered a hybrid RAG classifier reaching 73.6% top-1 accuracy across 10,000+ regulatory codes.
+    details:
+      - "Prototyped agentic trade-policy surveillance (MCP, Google ADK, FastAPI), automating a fully manual workflow across 7 sources in 6 jurisdictions. Later productionized."
+      - "Engineered a hybrid RAG classifier (BM25 + dense retrieval, RRF) over 10,000+ regulatory codes: 73.6% top-1 at <$0.01/query, with confidence-gated human review."
+      - "Benchmarked Gemma and Qwen models on on-premises GPUs (throughput, TTFT, ITL), for production system."
+  - id: perimattic
+    employer: Perimattic Inc.
+    role: AI Engineer
+    location: Bengaluru
+    dates: Jan 2023 – Aug 2024
+    url: https://perimattic.com/
+    impact: Deployed conversational AI agents serving 1M+ airport travellers at 99.95% uptime.
+    details:
+      - "Deployed conversational AI agents (LangChain) serving 1M+ airport travellers. Integrated with legacy backends at 99.95% uptime."
+      - "Delivered enterprise knowledge agents grounded in Google Docs and SharePoint, giving non-technical users natural-language access to internal knowledge."
+      - "Built an LLM evaluation framework (DeepEval) with regression gates on ML deployments."
+      - "Forecast parking utilization (Prophet) for a UK airport parking operator. The forecasts underpinned dynamic pricing, contributing to 15% revenue growth."
+  - id: freelance
+    employer: Freelance
+    role: Junior AI Engineer
+    location: Jaipur
+    dates: Mar 2022 – Jul 2023
+    impact: Cut airport plate-recognition processing from ~60 s to <5 s.
+    details:
+      - "Built real-time YOLO plate recognition for an airport, cutting processing from ~60 s to <5 s (12×)."

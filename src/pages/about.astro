@@ -1,0 +1,34 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getOrdered, getSite } from '../lib/content';
+
+const site = await getSite();
+const about = await getEntry('about', 'about');
+if (!about) throw new Error('src/content/about.md is missing');
+const { Content } = await render(about);
+const education = await getOrdered('education');
+---
+<Base title="About" description={`About ${site.name}: ${site.description}`}>
+  <div class="wrap page-head">
+    <h1 class="page-title">About</h1>
+    <p class="page-lede">{about.data.status} <a class="link link--on" href="/#contact">Get in touch</a></p>
+  </div>
+  <div class="wrap page-body">
+    <div class="prose"><Content /></div>
+  </div>
+  <section class="section" id="education">
+    <div class="wrap grid">
+      <div class="split-side sticky"><h2 class="section-title">Education</h2></div>
+      <div class="split-main">
+        {education.map(({ data }) => (
+          <article class="edu">
+            <h3>{data.degree}</h3>
+            <p class="edu-meta">{data.institution}. {data.dates}</p>
+            <ul>{data.notes.map((note) => <li>{note}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

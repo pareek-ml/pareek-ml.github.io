@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, hasPage, postHref } from '../lib/content';
+
+const { post, level = 'h3' } = Astro.props as { post: CollectionEntry<'writing'>; level?: 'h2' | 'h3' };
+const Heading = level;
+---
+<article class="post">
+  <time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDate(post.data.date)}</time>
+  <div>
+    <Heading><a class="link" href={postHref(post)}>{post.data.title}</a>{!hasPage(post) && ' (external)'}</Heading>
+    <p>{post.data.summary}</p>
+  </div>
+</article>
