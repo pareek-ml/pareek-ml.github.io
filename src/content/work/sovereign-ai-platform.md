@@ -9,8 +9,8 @@ metrics:
     label: of AI application traces logged
   - value: "100%"
     label: on-prem (LLM, embeddings, reranker, vector store)
-  - value: "Max"
-    label: throughput model chosen by benchmark, not by hype
+  - value: "Best"
+    label: throughput of all models tested
 order: 2
 featured: true
 draft: false
