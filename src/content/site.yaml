@@ -2,29 +2,29 @@ name: Yash Pareek
 role: AI Engineer
 eyebrow: AI Engineer · World Trade Organization · Geneva
 headline: AI that holds up in production, and in an audit.
-subheadline: I embed with the teams who own a problem, from analysts to department heads, and take AI from first prototype to a system they rely on every day, on infrastructure they control and with governance built in.
-description: AI Engineer at the World Trade Organization in Geneva. I embed with the teams who own a problem and take AI from prototype to production, on sovereign infrastructure and with governance built in.
+subheadline: I embed with the teams who own a problem and take AI from first prototype to a system they rely on every day, built on their infrastructure with governance in place.
+description: AI Engineer at the World Trade Organization in Geneva, with three years of experience taking AI from prototype to production, on infrastructure the client controls and with governance built in.
 location: Geneva, Switzerland
 proof_metrics:
-  - value: "7 → 16+"
-    label: trade sources monitored, from my prototype to the production system
+  - value: 1M+
+    label: travelers served by AI agents I deployed
+    note: Perimattic, 2023–2024
+  - value: "17%"
+    label: less AI model usage, by removing duplicates before any model runs
     work: trade-measure-surveillance
-  - value: 100%
-    label: of AI activity logged and auditable
-    work: sovereign-ai-platform
-  - value: "97%"
-    label: of customs-code searches with the right answer in the top five
-    work: product-code-recommender
+  - value: 12×
+    label: faster number-plate recognition at an airport
+    note: Freelance computer vision, 2022–2023
 sections:
   work:
     kicker: Selected work
-    title: Four AI systems now in production at an international organization
+    title: Four AI systems now in production at the World Trade Organization
   approach:
     kicker: How I work
     title: I embed with the people who own the problem, and stay until the system runs without me
   experience:
     kicker: Experience
-    title: Shipping AI to real users since 2022, from airport travellers to member governments
+    title: Three years shipping AI to real users, from airport travelers to member governments
   capabilities:
     kicker: What I bring
     title: Strategy, engineering and governance, so a system can be justified, built and trusted

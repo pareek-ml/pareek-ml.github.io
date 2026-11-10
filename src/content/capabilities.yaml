@@ -1,27 +1,23 @@
+# Each column states what it gets the client. Tools live in toolkit.yaml.
 items:
   - id: strategy
     title: Strategy
     summary: Find where AI pays back, and where it won't.
     lines:
-      - Scoping and prioritizing use cases with department heads and the analysts who do the work
+      - Use cases scoped and prioritized with department heads and the analysts who do the work
       - Stop-or-scale decisions on evidence, before a pilot becomes a sunk cost
-      - Model selection on benchmarks, not reputation
-      - Demand forecasting and dynamic pricing
-      - End-user training, handoff and adoption
+      - "Adoption: training, handoff and procedures teams actually use"
   - id: engineering
     title: Engineering
     summary: Build systems that run in production, on infrastructure the client controls.
     lines:
-      - "Agents and retrieval: RAG, MCP, LangGraph, Google ADK"
-      - "Models: PyTorch, Hugging Face, vLLM, fine-tuning"
-      - "Data and search: Weaviate, Qdrant, Chroma, BM25, SQL Server, Databricks"
-      - "Delivery: Docker, Kubernetes, CI/CD, FastAPI, on-premises deployment"
-      - "Languages: Python, C++, SQL, TypeScript"
+      - Agentic and retrieval systems, from first prototype to daily use
+      - Models benchmarked and served on the client's own hardware
+      - Forecasting and pricing models tied to revenue
   - id: governance
     title: Governance
     summary: Make AI auditable and safe to scale.
     lines:
-      - "Regulation: EU AI Act, GDPR, data residency"
-      - "Evaluation: DeepEval, RAGAS"
-      - "Monitoring: Langfuse, MLflow, Weights & Biases, Grafana"
-      - Drift detection and selective retraining
+      - Access rights enforced on every query
+      - Release gates that block a release when quality drops
+      - "A full audit trail: every AI interaction logged"

@@ -28,9 +28,8 @@ const ogImage = new URL('/og.png', Astro.site).href;
     <meta name="description" content={metaDescription} />
     <meta name="author" content={site.name} />
     <meta name="robots" content={noindex ? 'noindex' : 'index, follow'} />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafaf8" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151514" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#faf6ec" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title={`${site.name}: writing`} href="/rss.xml" />

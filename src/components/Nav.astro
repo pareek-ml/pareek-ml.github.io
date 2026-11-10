@@ -1,10 +1,10 @@
 ---
-import { getSite } from '../lib/content';
+import { getSite, showWriting } from '../lib/content';
 const site = await getSite();
 const path = Astro.url.pathname;
 const links = [
   { label: 'Work', href: '/work/' },
-  { label: 'Writing', href: '/writing/' },
+  ...((await showWriting()) ? [{ label: 'Writing', href: '/writing/' }] : []),
   { label: 'How I work', href: '/#approach' },
   { label: 'About', href: '/about/' },
 ];

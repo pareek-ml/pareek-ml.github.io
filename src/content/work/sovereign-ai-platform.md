@@ -1,16 +1,15 @@
 ---
-title: Running AI on the organization's own infrastructure, with every output on record
-client: International organization, Geneva
+title: Running AI on the WTO's own servers, with every output on record
+short: Sovereign AI platform
+client: World Trade Organization, Geneva
 sector: Public sector · AI governance
 tags: [On-prem LLMs, vLLM, Observability, Governance]
-summary: An international organization handling sensitive information now runs its language models, search and storage entirely in-house, with every AI interaction logged for audit and one standard way to bring new models online.
+summary: The World Trade Organization handles sensitive information. It now runs its language models, search and storage entirely in-house, with every AI interaction logged for audit and one standard way to bring new models online.
 metrics:
   - value: "100%"
     label: of AI activity logged and auditable
   - value: "0"
     label: external AI providers receiving the organization's data
-  - value: "100%"
-    label: of the AI stack hosted on the organization's own servers
 order: 2
 featured: true
 draft: false
@@ -21,9 +20,9 @@ architecture:
   caption: "TODO: Every application shares one in-house platform, and every call is logged on the way through"
 ---
 
-## The organization wanted AI, but could not send its data outside
+## The WTO wanted AI, but could not send its data outside
 
-The organization handles sensitive information and wanted to use large language models across its work. Sending that data to an external provider was not an option. Any AI it used had to run on its own infrastructure, and leadership had to be able to answer, at any time, what an AI system did, for whom, and why.
+The WTO handles sensitive information and wanted to use large language models across its work. Sending that data to an external provider was not an option. Any AI it used had to run on its own infrastructure, and leadership had to be able to answer, at any time, what an AI system did, for whom, and why.
 
 ## Without a shared platform, every team would build its own
 

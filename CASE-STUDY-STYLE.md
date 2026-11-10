@@ -30,6 +30,15 @@ A reader who sees only the **title, summary, metric cards and the four section h
 - Headcount or FTE figures, team sizes, sprint details.
 - Model metrics (MRR@5, recall@k, tokens). Translate them: recall@5 = 0.97 → "the right code is in the top five 97% of the time".
 - Numbers that are not true or cannot be backed up. A missing metric is better than a soft one.
+- Test results presented as live results. Say "in testing" when a figure comes from a test set.
+- The same figure worded two ways. If it measured usage, don't call it cost anywhere.
+- "100%" as decoration. Use it only where it is the point, and not more than once per screen.
+
+## Precision
+
+- Name the client (the World Trade Organization) rather than anonymizing it; the context gives it away anyway.
+- Say "built" or "led" for work you owned, and "part of the team that…" for shared work.
+- Use US spelling throughout, as the WTO does.
 
 ## Exhibits
 
@@ -40,14 +49,14 @@ Captions are action titles too: state the finding the chart proves ("Duplicates 
 The homepage is one argument, told top-down:
 
 1. **Hero: the governing thought.** What you deliver, in one line ("AI that holds up in production, and in an audit"), then who you do it with and how.
-2. **Proof strip.** Three outcomes, one per case study, in plain language. Each figure links to the case study that backs it.
+2. **Proof strip.** Three outcomes that show range beyond the current role, in plain language. Don't repeat numbers that appear on the work cards right below. Each figure says where it comes from: a case study, or a short note such as "Perimattic, 2023–2024".
 3. **Selected work.** The case studies themselves, the evidence.
 4. **How I work.** Why the results are repeatable.
 5. **Experience.** That this is a track record, not a one-off.
 6. **What I bring.** Each capability starts with what it gets the client; tools come second.
 7. **Contact.**
 
-Every section has a small label and an **action title**, a sentence that makes the section's point (edit them in Site settings → Homepage section titles). Someone who reads only those titles should get the whole story. Writing appears on the homepage only once there are at least two posts.
+Every section has a small label and an **action title**, a sentence that makes the section's point (edit them in Site settings → Homepage section titles). Someone who reads only those titles should get the whole story. Writing appears on the homepage and in the menu only once there are at least two posts.
 
 ## Who it is written for
 

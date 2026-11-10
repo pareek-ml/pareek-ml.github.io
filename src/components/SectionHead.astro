@@ -1,18 +1,19 @@
 ---
 /**
- * A homepage section head: the short label sits in the left rail, the action title in the text column.
- * Read top to bottom, the titles tell the page's argument on their own.
+ * A homepage section head: a short uppercase label over the action title, a full sentence that makes the section's point.
+ * Read top to bottom, the titles tell the page's argument on their own. The slot holds an optional link on the right.
  */
 interface Props {
   kicker: string;
   title: string;
+  reveal?: boolean;
 }
-const { kicker, title } = Astro.props;
+const { kicker, title, reveal = true } = Astro.props;
 ---
-<div class="section-head grid reveal">
-  <div class="section-rail">
+<div class:list={['section-head', { reveal }]}>
+  <div>
     <p class="section-kicker">{kicker}</p>
-    <slot />
+    <h2 class="section-title">{title}</h2>
   </div>
-  <h2 class="section-title">{title}</h2>
+  <slot />
 </div>

@@ -23,6 +23,8 @@ const work = defineCollection({
       });
     return z.object({
       title: z.string(),
+      // A few words naming the project, for places too small for the full title.
+      short: z.string().optional(),
       client: z.string(),
       sector: z.string(),
       tags: z.array(z.string()).default([]),
@@ -65,6 +67,8 @@ const experience = defineCollection({
     dates: z.string(),
     url: z.url().optional(),
     impact: z.string(),
+    // The number that leads the card on the homepage.
+    highlight: metric.optional(),
     details: z.array(z.string()),
   }),
 });
@@ -76,7 +80,7 @@ const education = defineCollection({
     degree: z.string(),
     institution: z.string(),
     dates: z.string(),
-    notes: z.array(z.string()),
+    notes: z.array(z.string()).default([]),
   }),
 });
 
@@ -105,8 +109,11 @@ const site = defineCollection({
     subheadline: z.string(),
     description: z.string(),
     location: z.string(),
-    // `work` names the case study that backs the figure, by its filename without .md.
-    proof_metrics: z.array(metric.extend({ work: z.string().optional() })).length(3),
+    // Each figure can point to its evidence: `work` names a case study by its filename without .md; otherwise `href` links
+    // anywhere and `note` says where the number comes from.
+    proof_metrics: z
+      .array(metric.extend({ work: z.string().optional(), href: z.string().optional(), note: z.string().optional() }))
+      .length(3),
     sections: z.object({
       work: sectionHead,
       approach: sectionHead,
@@ -121,4 +128,10 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { work, writing, about, experience, education, capabilities, approach, site };
+/** The tools behind "What I bring", grouped by area. */
+const toolkit = defineCollection({
+  loader: file('src/content/toolkit.yaml', { parser: items }),
+  schema: z.object({ order: z.number(), area: z.string(), tools: z.array(z.string()) }),
+});
+
+export const collections = { work, writing, about, experience, education, capabilities, toolkit, approach, site };

@@ -1,45 +1,46 @@
 items:
   - id: wto
+    highlight:
+      value: 6 months
+      label: from intern to AI Engineer
     employer: World Trade Organization
-    role: AI Engineer
+    role: Intern → AI Engineer
     location: Geneva, CH
-    dates: Sep 2026 – present
+    dates: Mar 2026 – present
     url: https://www.wto.org/
-    impact: Took four AI systems into production, from trade-measure monitoring to a sovereign AI platform that every application now runs on.
+    impact: Built the trade-measure monitoring prototype as an intern, then was promoted to AI Engineer within six months and took it into production.
     details:
-      - "Scaled automated trade-measure monitoring from 7 to 16+ sources with department heads and trade analysts. Removing duplicates before AI processing cut model usage by 17%."
-      - "Shipped an HS code recommender for member governments: the right code is in the top five 97% of the time, in under three seconds, and ready for the next HS revision."
-      - "Built a sovereign AI platform (vLLM, Weaviate, MinIO) so no data leaves the organization's own infrastructure."
-      - "Put organization-wide AI governance in place (Langfuse, guardrails): 100% of AI activity is logged and auditable."
-      - "Deployed a knowledge assistant over 5,400+ internal documents that enforces each user's access rights on every query."
-  - id: wto-intern
-    employer: World Trade Organization
-    role: Intern
-    location: Geneva, CH
-    dates: Mar 2026 – Sep 2026
-    url: https://www.wto.org/
-    impact: Built the prototype that proved trade-policy monitoring could be automated, then took it to production as AI Engineer.
-    details:
-      - "Prototyped automated trade-policy monitoring across 7 sources in 6 jurisdictions (MCP, Google ADK, FastAPI), replacing a fully manual workflow."
+      - "Built the trade-measure monitoring prototype (MCP, Google ADK, FastAPI): 7 sources across 6 jurisdictions, replacing a fully manual workflow."
+      - "Took it into production with department heads and trade analysts and scaled it to 16+ sources. Removing duplicates before AI processing cut model usage by 17%."
       - "Built a classifier over 10,000+ regulatory codes (hybrid retrieval) with 73.6% top-1 accuracy at under $0.01 per query, routing low-confidence cases to human review."
-      - "Benchmarked open models (Gemma, Qwen) on the organization's own GPUs to choose the production model."
+      - "Shipped an HS code recommender for member governments: in testing, the right code is in the top five 97% of the time, in under three seconds, and it is ready for the next HS revision."
+      - "Deployed a knowledge assistant over 5,400+ internal documents that enforces each user's access rights on every query."
+      - "Benchmarked open models (Gemma, Qwen) on the WTO's own GPUs to choose the production model."
+      - "Part of the team that built the WTO's sovereign AI platform (vLLM, Weaviate, MinIO), so no data leaves its own infrastructure."
+      - "Part of the team that put organization-wide AI governance in place (Langfuse, guardrails), with all AI activity logged and auditable."
   - id: perimattic
+    highlight:
+      value: "15%"
+      label: revenue growth for a UK airport parking client, supported by my demand forecasts
     employer: Perimattic Inc.
     role: AI Engineer
     location: Bengaluru
     dates: Jan 2023 – Aug 2024
     url: https://perimattic.com/
-    impact: Deployed conversational AI agents serving 1M+ airport travellers at 99.95% uptime.
+    impact: Forecast parking demand for a UK airport parking client, supporting the dynamic pricing behind its 15% revenue growth.
     details:
-      - "Deployed conversational AI agents (LangChain) serving 1M+ airport travellers, integrated with legacy back-end systems at 99.95% uptime."
+      - "Deployed conversational AI agents (LangChain) serving 1M+ airport travelers, integrated with legacy back-end systems at 99.95% uptime."
       - "Delivered enterprise knowledge agents over Google Docs and SharePoint, giving non-technical staff plain-language access to internal knowledge."
       - "Built an LLM evaluation framework (DeepEval) that blocks a release when quality regresses."
-      - "Forecast parking demand for a UK airport parking operator. The forecasts underpinned dynamic pricing that contributed to 15% revenue growth."
+      - "Forecast parking demand for a UK airport parking client. The forecasts underpinned dynamic pricing that contributed to 15% revenue growth."
   - id: freelance
+    highlight:
+      value: "<5 s"
+      label: to read a number plate at an airport, down from about 60 seconds
     employer: Freelance
-    role: Junior AI Engineer
+    role: Computer vision engineer
     location: Jaipur
     dates: Mar 2022 – Jul 2023
-    impact: Made airport number-plate recognition 12× faster, from about 60 seconds to under 5.
+    impact: Built real-time number-plate recognition for an airport, from model to deployment.
     details:
-      - "Built real-time number-plate recognition (YOLO) for an airport, cutting processing time from ~60 s to under 5 s."
+      - "Trained a YOLO detection model and deployed it for real-time recognition at the airport."

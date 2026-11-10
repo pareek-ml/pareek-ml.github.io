@@ -18,11 +18,14 @@ const { title, client, sector, tags, summary, metrics, links, exhibit, architect
 ---
 <Base title={title} description={summary} ogType="article">
   <article>
-    <header class="wrap page-head">
-      <p class="page-kicker">{sector}</p>
-      <h1 class="page-title">{title}</h1>
-      <p class="case-summary">{summary}</p>
+    <header class="band case-head">
+      <div class="wrap page-head">
+        <p class="page-kicker">{sector}</p>
+        <h1 class="page-title">{title}</h1>
+        <p class="case-summary">{summary}</p>
+      </div>
     </header>
+    <div class="stripe stripe--thin" aria-hidden="true"></div>
     {metrics.length > 0 && (
       <div class="wrap">
         <dl class="metric-row">

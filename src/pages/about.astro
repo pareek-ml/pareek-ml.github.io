@@ -25,7 +25,7 @@ const education = await getOrdered('education');
           <article class="edu">
             <h3>{data.degree}</h3>
             <p class="edu-meta">{data.institution}. {data.dates}</p>
-            <ul>{data.notes.map((note) => <li>{note}</li>)}</ul>
+            {data.notes.length > 0 && <ul>{data.notes.map((note) => <li>{note}</li>)}</ul>}
           </article>
         ))}
       </div>

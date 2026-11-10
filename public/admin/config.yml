@@ -30,6 +30,7 @@ collections:
     summary: "{{order}}. {{title}}"
     fields:
       - { name: title, label: Title, widget: string, hint: "The outcome, not the technology, e.g. 'Classifying products into customs codes in under three seconds'." }
+      - { name: short, label: Short name, widget: string, required: false, hint: "A few words naming the project, e.g. 'Customs-code recommender'. Shown where the full title won't fit, such as under a homepage proof figure." }
       - { name: client, label: Client, widget: string, hint: "Anonymize freely, e.g. 'European logistics group'." }
       - { name: sector, label: Sector, widget: string }
       - { name: tags, label: Tags, widget: list, required: false }
@@ -110,7 +111,7 @@ collections:
         fields:
           - { name: name, label: Name, widget: string }
           - { name: role, label: Role line, widget: string }
-          - { name: eyebrow, label: Hero eyebrow, widget: string }
+          - { name: eyebrow, label: Hero eyebrow, widget: string, hint: "Segments separated by ' · '. The last one is hidden on narrow phones so it never wraps alone." }
           - { name: headline, label: Headline, widget: string }
           - { name: subheadline, label: Subheadline, widget: string }
           - { name: description, label: Search description, widget: text }
@@ -120,11 +121,13 @@ collections:
             widget: list
             min: 3
             max: 3
-            hint: "One outcome per case study, in plain words."
+            hint: "Three outcomes that show range, in plain words. Link each to its evidence: a case study, or another page with a note."
             fields:
               - { name: value, label: Value, widget: string }
               - { name: label, label: Label, widget: string }
               - { name: work, label: Case study, widget: relation, collection: work, value_field: "{{slug}}", search_fields: [title], display_fields: [title], required: false, hint: "The case study this figure links to." }
+              - { name: note, label: Source note, widget: string, required: false, hint: "Where the number comes from, when it isn't a case study, e.g. 'Perimattic, 2023–2024'." }
+              - { name: href, label: Link, widget: string, required: false, hint: "Optional link for the source note, e.g. /work/." }
           - name: sections
             label: Homepage section titles
             widget: object
@@ -198,6 +201,13 @@ collections:
               - { name: dates, label: Dates, widget: string }
               - { name: url, label: URL, widget: string, required: false }
               - { name: impact, label: One-line impact, widget: string }
+              - name: highlight
+                label: Headline number on the card
+                widget: object
+                required: false
+                fields:
+                  - { name: value, label: Value, widget: string }
+                  - { name: label, label: Label, widget: string }
               - { name: details, label: Detail bullets, widget: list }
       - name: education
         label: Education
@@ -213,7 +223,7 @@ collections:
               - { name: degree, label: Degree, widget: string }
               - { name: institution, label: Institution, widget: string }
               - { name: dates, label: Dates, widget: string }
-              - { name: notes, label: Notes, widget: list }
+              - { name: notes, label: Notes, widget: list, required: false }
       - name: capabilities
         label: Capabilities
         file: src/content/capabilities.yaml
@@ -228,7 +238,20 @@ collections:
               - { name: id, label: ID, widget: string, hint: "Short and unique, e.g. strategy." }
               - { name: title, label: Title, widget: string }
               - { name: summary, label: What it gets the client, widget: string, required: false }
-              - { name: lines, label: Lines, widget: list, hint: "Short and scannable: 'Area: tool, tool, tool'." }
+              - { name: lines, label: Lines, widget: list, hint: "Statements of what the client gets, not tool names. Tools go in Toolkit." }
+      - name: toolkit
+        label: Toolkit
+        file: src/content/toolkit.yaml
+        fields:
+          - name: items
+            label: Areas
+            label_singular: Area
+            widget: list
+            summary: "{{fields.area}}"
+            fields:
+              - { name: id, label: ID, widget: string, hint: "Short and unique, e.g. models." }
+              - { name: area, label: Area, widget: string }
+              - { name: tools, label: Tools, widget: list, hint: "One tool per entry; each shows as a pill." }
       - name: approach
         label: Approach
         file: src/content/approach.yaml
