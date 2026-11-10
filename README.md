@@ -24,6 +24,8 @@ npm run check    # type-checks the code and content schemas
 | About page text | `src/content/about.md` |
 | CV | `public/files/cv.pdf` |
 
+Each proof metric in `site.yaml` can name the case study behind it with `work: <filename without .md>`, and the home page links the figure there. The build fails if that case study doesn't exist or is a draft.
+
 The schemas are in `src/content.config.ts`. A build fails if a file doesn't match its schema. If you change a schema, change `public/admin/config.yml` to match. Entries in the YAML lists appear in file order.
 
 ## Add a case study

@@ -10,7 +10,7 @@ metrics:
   - value: "100%"
     label: of queries checked against the user's access rights
 order: 4
-featured: false
+featured: true
 draft: false
 links: []
 exhibit:

@@ -1,0 +1,18 @@
+---
+/**
+ * A homepage section head: the short label sits in the left rail, the action title in the text column.
+ * Read top to bottom, the titles tell the page's argument on their own.
+ */
+interface Props {
+  kicker: string;
+  title: string;
+}
+const { kicker, title } = Astro.props;
+---
+<div class="section-head grid reveal">
+  <div class="section-rail">
+    <p class="section-kicker">{kicker}</p>
+    <slot />
+  </div>
+  <h2 class="section-title">{title}</h2>
+</div>

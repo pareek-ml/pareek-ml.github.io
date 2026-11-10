@@ -34,3 +34,21 @@ A reader who sees only the **title, summary, metric cards and the four section h
 ## Exhibits
 
 Captions are action titles too: state the finding the chart proves ("Duplicates are removed before any AI model runs, cutting model usage by 17%"), not what it shows ("Token consumption chart"). Keep the `TODO:` prefix until the image exists; the figure stays hidden until then.
+
+## The homepage uses the same rules
+
+The homepage is one argument, told top-down:
+
+1. **Hero: the governing thought.** What you deliver, in one line ("AI that holds up in production, and in an audit"), then who you do it with and how.
+2. **Proof strip.** Three outcomes, one per case study, in plain language. Each figure links to the case study that backs it.
+3. **Selected work.** The case studies themselves, the evidence.
+4. **How I work.** Why the results are repeatable.
+5. **Experience.** That this is a track record, not a one-off.
+6. **What I bring.** Each capability starts with what it gets the client; tools come second.
+7. **Contact.**
+
+Every section has a small label and an **action title**, a sentence that makes the section's point (edit them in Site settings → Homepage section titles). Someone who reads only those titles should get the whole story. Writing appears on the homepage only once there are at least two posts.
+
+## Who it is written for
+
+Consulting (McKinsey, BCG X, Big Four) and forward-deployed engineering (FDE) roles. Both reward the same signals, so lean on them: embedded with the people who own the problem, prototype to production, outcomes over activity, the judgment to stop a weak project early, and a system the client can run without you.

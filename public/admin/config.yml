@@ -120,9 +120,52 @@ collections:
             widget: list
             min: 3
             max: 3
+            hint: "One outcome per case study, in plain words."
             fields:
               - { name: value, label: Value, widget: string }
               - { name: label, label: Label, widget: string }
+              - { name: work, label: Case study, widget: relation, collection: work, value_field: "{{slug}}", search_fields: [title], display_fields: [title], required: false, hint: "The case study this figure links to." }
+          - name: sections
+            label: Homepage section titles
+            widget: object
+            hint: "Each title is a full sentence that states the section's point, so a visitor who only skims the titles still gets the story."
+            fields:
+              - name: work
+                label: Selected work
+                widget: object
+                fields:
+                  - { name: kicker, label: Label, widget: string }
+                  - { name: title, label: Action title, widget: string }
+              - name: approach
+                label: How I work
+                widget: object
+                fields:
+                  - { name: kicker, label: Label, widget: string }
+                  - { name: title, label: Action title, widget: string }
+              - name: experience
+                label: Experience
+                widget: object
+                fields:
+                  - { name: kicker, label: Label, widget: string }
+                  - { name: title, label: Action title, widget: string }
+              - name: capabilities
+                label: What I bring
+                widget: object
+                fields:
+                  - { name: kicker, label: Label, widget: string }
+                  - { name: title, label: Action title, widget: string }
+              - name: writing
+                label: Writing
+                widget: object
+                fields:
+                  - { name: kicker, label: Label, widget: string }
+                  - { name: title, label: Action title, widget: string }
+              - name: contact
+                label: Contact
+                widget: object
+                fields:
+                  - { name: title, label: Title, widget: string }
+                  - { name: lede, label: Lede, widget: string }
           - { name: email, label: Email, widget: string }
           - name: socials
             label: Socials
@@ -184,7 +227,8 @@ collections:
             fields:
               - { name: id, label: ID, widget: string, hint: "Short and unique, e.g. strategy." }
               - { name: title, label: Title, widget: string }
-              - { name: lines, label: Lines, widget: list }
+              - { name: summary, label: What it gets the client, widget: string, required: false }
+              - { name: lines, label: Lines, widget: list, hint: "Short and scannable: 'Area: tool, tool, tool'." }
       - name: approach
         label: Approach
         file: src/content/approach.yaml

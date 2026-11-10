@@ -1,13 +1,13 @@
 items:
-  - id: diagnose
-    title: Diagnose
-    outcome: A ranked view of the workflows where AI will pay back, and where it won't.
-  - id: design
-    title: Design
-    outcome: An architecture, evaluation plan and governance approach your risk team can review.
+  - id: embed
+    title: Embed
+    outcome: Work alongside the people who do the job, and map the decision and workflow before writing any code.
+  - id: prototype
+    title: Prove it
+    outcome: A working prototype on real data, so the case is proven, or the project stopped, before it gets expensive.
   - id: build
-    title: Build
-    outcome: A production system on your infrastructure, tested against your own data.
-  - id: scale
-    title: Scale
-    outcome: Monitoring, retraining and training so your team can run it independently.
+    title: Ship it
+    outcome: A production system on the client's infrastructure, with evaluation, monitoring and governance built in.
+  - id: handover
+    title: Hand it over
+    outcome: Procedures, documentation and training, so the team runs and extends it without me.
