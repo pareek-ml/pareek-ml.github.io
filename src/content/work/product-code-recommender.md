@@ -1,54 +1,42 @@
 ---
-title: Recommending HS codes in under three seconds
+title: Classifying products into customs codes in under three seconds
 client: International organization, Geneva
 sector: Public sector · Trade classification
 tags: [RAG, Hybrid retrieval, Classification, Evaluation]
-summary: A retrieval-augmented recommender that suggests the right HS 2022 code from a free-text product description, reaching 0.97 recall@5 with sub-3-second responses, on a versioned index ready for the next HS revision.
+summary: Member governments describe a product in plain words and get a shortlist of five HS codes in under three seconds. The right code is on that list 97% of the time, and usually at the top.
 metrics:
-  - value: "0.95"
-    label: MRR@5
-  - value: "0.97"
-    label: recall@5
+  - value: "97%"
+    label: of searches return the right code in the top five
   - value: "<3 s"
-    label: response time
+    label: from product description to shortlist
 order: 3
 featured: true
 draft: false
 links: []
 exhibit:
-  caption: "TODO: recall@k curve from k = 1 to 5"
+  caption: "TODO: The correct code is in the shortlist 97% of the time, and usually ranked first"
 architecture:
-  caption: "TODO: retrieval pipeline (description → hybrid retrieval over versioned HS index → candidate codes → LLM ranking → top five)"
+  caption: "TODO: A plain-language description becomes a ranked shortlist in four steps, on an index that can be swapped for the next HS edition"
 ---
 
-## Context
+## Assigning customs codes takes scarce expertise
 
-Every member government has to map products to Harmonized System (HS) codes. It takes expertise: the nomenclature is large, descriptions are often ambiguous, and getting it wrong affects everything downstream. Doing it by hand costs each member time and resources, and results vary from person to person.
+Every member government has to classify traded products under the Harmonized System (HS), the international nomenclature behind customs tariffs and trade statistics. It is specialist work: the nomenclature is vast, product descriptions are often ambiguous, and a wrong code affects everything downstream. Doing it by hand costs time, and results vary from one person to the next.
 
-## Challenge
+## The tool had to be fast, trusted by experts, and built to last
 
-- A very large label space in which many codes differ only by fine detail.
-- Users describe products in their own words, not in the vocabulary of the nomenclature.
-- The HS is revised periodically, so a system built on one edition must not become obsolete with the next.
-- The tool had to be fast enough to use interactively, and accurate enough that experts would trust it.
+- **Thousands of codes, many nearly identical.** Codes often differ only in fine detail, so close is not good enough.
+- **People don't speak in nomenclature.** Users describe products in their own words, not in the official vocabulary.
+- **The HS changes.** The system is revised periodically, so anything built on one edition risks becoming obsolete with the next.
+- **Experts need to trust it.** The tool had to answer fast enough to use live, and be accurate enough that specialists would rely on it.
 
-## Approach
+## We built a recommender that narrows thousands of codes to a shortlist of five
 
-1. **Index HS 2022, with versioning.** Built the retrieval index on the HS 2022 nomenclature as a versioned asset, so a future revision can be loaded without re-engineering the system.
-2. **Retrieve candidates.** Combined retrieval methods to surface the most plausible codes for a description.
-3. **Rank and recommend.** Used an LLM over the retrieved candidates to return a ranked top five, so experts choose from a short list instead of searching the full nomenclature.
-4. **Measure it properly.** Evaluated with ranking metrics (MRR@5, recall@5) on a labeled test set, and tuned for latency alongside accuracy.
+- **Matched meaning, not just words.** The system searches the nomenclature both by exact terms and by meaning, to find the most plausible codes for a plain-language description.
+- **Ranked a shortlist.** An AI model weighs those candidates and returns the five most likely, so experts choose from a short list instead of searching the full nomenclature.
+- **Measured what matters.** We tested accuracy on a labelled set of real classifications and tuned for speed alongside accuracy.
+- **Designed for the next edition.** The nomenclature is loaded as versioned data, so a new HS edition is a data update rather than a rebuild.
 
-## Impact
+## Classification now takes seconds, and will survive the next HS revision
 
-- The correct code appears in the top five 97% of the time (recall@5 = 0.97).
-- It is usually ranked first or second (MRR@5 = 0.95).
-- Results return in under three seconds, fast enough for interactive use.
-- Saves each member government time and resources on classification work.
-- Versioned design means the next HS revision is a data update, not a rebuild.
-
-## What I'd do next
-
-- Capture expert selections as feedback to keep improving ranking.
-- Add explanations that cite the nomenclature text behind each suggestion.
-- Monitor performance by HS chapter to find weak spots.
+The right code appears in the top five 97% of the time, and is usually ranked first. Results arrive in under three seconds, fast enough to use during live work. Member governments save time and resources on routine classification, specialists can focus on the genuinely hard cases, and the tool is ready for the next revision of the nomenclature.
