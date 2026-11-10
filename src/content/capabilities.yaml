@@ -3,7 +3,8 @@ items:
     title: Strategy
     summary: Find where AI pays back, and where it won't.
     lines:
-      - Prioritizing AI agents and workflow automation in sensitive environments
+      - Scoping and prioritizing use cases with department heads and the analysts who do the work
+      - Stop-or-scale decisions on evidence, before a pilot becomes a sunk cost
       - Model selection on benchmarks, not reputation
       - Demand forecasting and dynamic pricing
       - End-user training, handoff and adoption

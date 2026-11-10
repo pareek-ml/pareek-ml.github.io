@@ -2,12 +2,12 @@ name: Yash Pareek
 role: AI Engineer
 eyebrow: AI Engineer · World Trade Organization · Geneva
 headline: AI that holds up in production, and in an audit.
-subheadline: I work with the people who own a problem to find where AI pays back, build it on infrastructure they control, and put the governance in place to run it safely.
-description: AI Engineer at the World Trade Organization in Geneva, taking AI from pilot to production, on sovereign infrastructure and with governance built in.
+subheadline: I embed with the teams who own a problem, from analysts to department heads, and take AI from first prototype to a system they rely on every day, on infrastructure they control and with governance built in.
+description: AI Engineer at the World Trade Organization in Geneva. I embed with the teams who own a problem and take AI from prototype to production, on sovereign infrastructure and with governance built in.
 location: Geneva, Switzerland
 proof_metrics:
-  - value: "16+"
-    label: trade sources monitored continuously, without added headcount
+  - value: "7 → 16+"
+    label: trade sources monitored, from my prototype to the production system
   - value: 100%
     label: of AI activity logged and auditable
   - value: "97%"
@@ -18,7 +18,7 @@ sections:
     title: Four AI systems now in production at an international organization
   approach:
     kicker: How I work
-    title: I start from the decision a system has to support, not from the model
+    title: I embed with the people who own the problem, and stay until the system runs without me
   experience:
     kicker: Experience
     title: Shipping AI to real users since 2022, from airport travellers to member governments
@@ -30,7 +30,7 @@ sections:
     title: Notes from building AI in production
   contact:
     title: Let's talk.
-    lede: Whether you are deciding where AI fits or need a system that will hold up in an audit, email is the fastest way to reach me.
+    lede: I'm open to consulting and forward-deployed roles where AI strategy meets delivery. Email is the fastest way to reach me.
 email: ml.ypareek@gmail.com
 socials:
   - label: LinkedIn

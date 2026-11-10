@@ -48,3 +48,7 @@ The homepage is one argument, told top-down:
 7. **Contact.**
 
 Every section has a small label and an **action title**, a sentence that makes the section's point (edit them in Site settings → Homepage section titles). Someone who reads only those titles should get the whole story. Writing appears on the homepage only once there are at least two posts.
+
+## Who it is written for
+
+Consulting (McKinsey, BCG X, Big Four) and forward-deployed engineering (FDE) roles. Both reward the same signals, so lean on them: embedded with the people who own the problem, prototype to production, outcomes over activity, the judgment to stop a weak project early, and a system the client can run without you.
