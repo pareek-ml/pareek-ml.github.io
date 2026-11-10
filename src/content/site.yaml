@@ -8,10 +8,13 @@ location: Geneva, Switzerland
 proof_metrics:
   - value: "7 → 16+"
     label: trade sources monitored, from my prototype to the production system
+    work: trade-measure-surveillance
   - value: 100%
     label: of AI activity logged and auditable
+    work: sovereign-ai-platform
   - value: "97%"
     label: of customs-code searches with the right answer in the top five
+    work: product-code-recommender
 sections:
   work:
     kicker: Selected work

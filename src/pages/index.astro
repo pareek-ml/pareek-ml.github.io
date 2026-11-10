@@ -3,11 +3,21 @@ import Base from '../layouts/Base.astro';
 import Arrow from '../components/Arrow.astro';
 import NeighborField from '../components/NeighborField.astro';
 import PostRow from '../components/PostRow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Value from '../components/Value.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { getOrdered, getPosts, getSite, getWork } from '../lib/content';
 
 const site = await getSite();
-const featured = (await getWork()).filter((entry) => entry.data.featured);
+const work = await getWork();
+const featured = work.filter((entry) => entry.data.featured);
+// Each proof figure links to the case study behind it. A missing case study fails the build rather than shipping a broken link.
+const proof = site.proof_metrics.map((metric) => {
+  if (!metric.work) return { ...metric, entry: undefined };
+  const entry = work.find((item) => item.id === metric.work);
+  if (!entry) throw new Error(`site.yaml proof metric "${metric.value}" links to a case study that doesn't exist or is a draft: ${metric.work}`);
+  return { ...metric, entry };
+});
 const posts = (await getPosts()).slice(0, 3);
 const steps = await getOrdered('approach');
 const jobs = await getOrdered('experience');
@@ -52,25 +62,31 @@ const jsonLd = {
   </section>
 
   <section class="proof" aria-label="Selected results">
-    <dl class="wrap proof-list">
-      {site.proof_metrics.map(({ value, label }) => (
-        <div class="proof-item">
-          <dt class="proof-label">{label}</dt>
-          <dd class="proof-value">{value}</dd>
-        </div>
+    <ul class="wrap proof-list">
+      {proof.map(({ value, label, entry }) => (
+        <li>
+          {entry ? (
+            <a class="proof-item" href={`/work/${entry.id}/`}>
+              <span class="proof-value"><Value value={value} /></span>
+              <span class="proof-label"><span class="link">{label}</span></span>
+              <span class="proof-more"><span class="visually-hidden">Case study: {entry.data.title}</span><Arrow /></span>
+            </a>
+          ) : (
+            <div class="proof-item">
+              <span class="proof-value"><Value value={value} /></span>
+              <span class="proof-label">{label}</span>
+            </div>
+          )}
+        </li>
       ))}
-    </dl>
+    </ul>
   </section>
 
   <section class="section" id="work">
     <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <p class="section-kicker">{sections.work.kicker}</p>
-          <h2 class="section-title">{sections.work.title}</h2>
-        </div>
+      <SectionHead {...sections.work}>
         <a class="arrow-link" href="/work/"><span class="link">All work</span><Arrow /></a>
-      </div>
+      </SectionHead>
       <div class="work-grid">
         {featured.map((entry) => <WorkCard entry={entry} />)}
       </div>
@@ -79,7 +95,7 @@ const jsonLd = {
 
   <section class="section" id="approach">
     <div class="wrap">
-      <div class="section-head reveal"><div><p class="section-kicker">{sections.approach.kicker}</p><h2 class="section-title">{sections.approach.title}</h2></div></div>
+      <SectionHead {...sections.approach} />
       <ol class="steps reveal">
         {steps.map(({ data }) => (
           <li class="step">
@@ -93,24 +109,24 @@ const jsonLd = {
 
   <section class="section" id="experience">
     <div class="wrap">
-      <div class="section-head reveal"><div><p class="section-kicker">{sections.experience.kicker}</p><h2 class="section-title">{sections.experience.title}</h2></div></div>
+      <SectionHead {...sections.experience} />
       <div class="timeline reveal">
         {jobs.map(({ data }) => (
           <details class="job">
-            <summary>
-              <div>
-                <div class="job-head">
-                  <h3 class="job-employer">{data.employer}</h3>
-                  <span class="job-dates">{data.dates}</span>
-                </div>
+            <summary class="grid">
+              <span class="job-dates">{data.dates}</span>
+              <div class="job-main">
+                <h3 class="job-employer">{data.employer}</h3>
                 <p class="job-role">{data.role}, {data.location}</p>
                 <p class="job-impact">{data.impact}</p>
               </div>
               <span class="job-toggle" aria-hidden="true"></span>
             </summary>
-            <div class="job-detail">
-              <ul>{data.details.map((line) => <li>{line}</li>)}</ul>
-              {data.url && <p><a class="link link--on" href={data.url} rel="noopener">Visit {data.employer}</a></p>}
+            <div class="grid">
+              <div class="job-detail">
+                <ul>{data.details.map((line) => <li>{line}</li>)}</ul>
+                {data.url && <p><a class="link link--on" href={data.url} rel="noopener">Visit {data.employer}</a></p>}
+              </div>
             </div>
           </details>
         ))}
@@ -120,7 +136,7 @@ const jsonLd = {
 
   <section class="section" id="capabilities">
     <div class="wrap">
-      <div class="section-head reveal"><div><p class="section-kicker">{sections.capabilities.kicker}</p><h2 class="section-title">{sections.capabilities.title}</h2></div></div>
+      <SectionHead {...sections.capabilities} />
       <div class="cap-columns reveal">
         {capabilities.map(({ data }) => (
           <div>
@@ -136,7 +152,7 @@ const jsonLd = {
   {showWriting && (
   <section class="section" id="writing">
     <div class="wrap">
-      <div class="section-head reveal"><div><p class="section-kicker">{sections.writing.kicker}</p><h2 class="section-title">{sections.writing.title}</h2></div></div>
+      <SectionHead {...sections.writing} />
       <div class="reveal">
         <div class="posts">
           {posts.map((post) => <PostRow post={post} />)}

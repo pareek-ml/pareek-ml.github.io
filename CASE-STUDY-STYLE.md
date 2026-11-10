@@ -40,7 +40,7 @@ Captions are action titles too: state the finding the chart proves ("Duplicates 
 The homepage is one argument, told top-down:
 
 1. **Hero: the governing thought.** What you deliver, in one line ("AI that holds up in production, and in an audit"), then who you do it with and how.
-2. **Proof strip.** Three outcomes, one per case study, in plain language.
+2. **Proof strip.** Three outcomes, one per case study, in plain language. Each figure links to the case study that backs it.
 3. **Selected work.** The case studies themselves, the evidence.
 4. **How I work.** Why the results are repeatable.
 5. **Experience.** That this is a track record, not a one-off.

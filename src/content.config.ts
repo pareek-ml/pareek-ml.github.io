@@ -105,7 +105,8 @@ const site = defineCollection({
     subheadline: z.string(),
     description: z.string(),
     location: z.string(),
-    proof_metrics: z.array(metric).length(3),
+    // `work` names the case study that backs the figure, by its filename without .md.
+    proof_metrics: z.array(metric.extend({ work: z.string().optional() })).length(3),
     sections: z.object({
       work: sectionHead,
       approach: sectionHead,

@@ -1,0 +1,8 @@
+---
+/** A metric value. An arrow in a before-and-after figure ("7 → 16+") is set lighter than the serif digits. */
+interface Props {
+  value: string;
+}
+const [from, to] = Astro.props.value.split('→').map((part) => part.trim());
+---
+{to === undefined ? from : <>{from}<span class="value-to" aria-hidden="true">→</span><span class="visually-hidden"> to </span>{to}</>}

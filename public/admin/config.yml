@@ -120,9 +120,11 @@ collections:
             widget: list
             min: 3
             max: 3
+            hint: "One outcome per case study, in plain words."
             fields:
               - { name: value, label: Value, widget: string }
               - { name: label, label: Label, widget: string }
+              - { name: work, label: Case study, widget: relation, collection: work, value_field: "{{slug}}", search_fields: [title], display_fields: [title], required: false, hint: "The case study this figure links to." }
           - name: sections
             label: Homepage section titles
             widget: object
