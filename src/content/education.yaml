@@ -1,16 +1,9 @@
 items:
   - id: usi
-    degree: Master in Artificial Intelligence
-    institution: Università della Svizzera Italiana, Switzerland
+    degree: MSc in Artificial Intelligence
+    institution: Università della Svizzera Italiana (USI), Lugano
     dates: Sep 2024 – present
-    notes:
-      - Hands-on experience with deep learning in Python using PyTorch.
-      - Topics covered include reinforcement learning, traditional machine learning, computer vision, robotics, and natural language processing.
-      - Participated in the Neuralwave hackathon.
   - id: rtu
-    degree: B.Tech. Computer Science & Engineering
+    degree: B.Tech. in Computer Science and Engineering
     institution: Rajasthan Technical University, India
     dates: Aug 2018 – Jul 2022
-    notes:
-      - "Bachelor project: sentiment analysis using LSTM."
-      - "Bachelor report presentation: a comparative study of LSTM and GRU for sentiment analysis."

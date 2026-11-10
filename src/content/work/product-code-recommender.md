@@ -1,12 +1,13 @@
 ---
 title: Classifying products into customs codes in under three seconds
-client: International organization, Geneva
+short: Customs-code recommender
+client: World Trade Organization, Geneva
 sector: Public sector · Trade classification
 tags: [RAG, Hybrid retrieval, Classification, Evaluation]
-summary: Member governments describe a product in plain words and get a shortlist of five HS codes in under three seconds. The right code is on that list 97% of the time, and usually at the top.
+summary: Member governments describe a product in plain words and get a shortlist of five HS codes in under three seconds. In testing, the right code was on that list 97% of the time, and usually at the top.
 metrics:
   - value: "97%"
-    label: of searches return the right code in the top five
+    label: "in testing: the right code in the top five"
   - value: "<3 s"
     label: from product description to shortlist
 order: 3
@@ -14,7 +15,7 @@ featured: true
 draft: false
 links: []
 exhibit:
-  caption: "TODO: The correct code is in the shortlist 97% of the time, and usually ranked first"
+  caption: "TODO: In testing, the correct code was in the shortlist 97% of the time, and usually ranked first"
 architecture:
   caption: "TODO: A plain-language description becomes a ranked shortlist in four steps, on an index that can be swapped for the next HS edition"
 ---
@@ -34,9 +35,9 @@ Every member government has to classify traded products under the Harmonized Sys
 
 - **Matched meaning, not just words.** The system searches the nomenclature both by exact terms and by meaning, to find the most plausible codes for a plain-language description.
 - **Ranked a shortlist.** An AI model weighs those candidates and returns the five most likely, so experts choose from a short list instead of searching the full nomenclature.
-- **Measured what matters.** We tested accuracy on a labelled set of real classifications and tuned for speed alongside accuracy.
+- **Measured what matters.** We tested accuracy on a labeled set of real classifications and tuned for speed alongside accuracy.
 - **Designed for the next edition.** The nomenclature is loaded as versioned data, so a new HS edition is a data update rather than a rebuild.
 
 ## Classification now takes seconds, and will survive the next HS revision
 
-The right code appears in the top five 97% of the time, and is usually ranked first. Results arrive in under three seconds, fast enough to use during live work. Member governments save time and resources on routine classification, specialists can focus on the genuinely hard cases, and the tool is ready for the next revision of the nomenclature.
+In testing, the right code appeared in the top five 97% of the time, and was usually ranked first. Results arrive in under three seconds, fast enough to use during live work. Member governments save time and resources on routine classification, specialists can focus on the genuinely hard cases, and the tool is ready for the next revision of the nomenclature.

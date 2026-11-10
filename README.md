@@ -20,13 +20,17 @@ npm run check    # type-checks the code and content schemas
 | Case studies | `src/content/work/*.md` |
 | Posts | `src/content/writing/*.md` |
 | Name, headline, proof metrics, email, socials, CV path | `src/content/site.yaml` |
-| Experience, education, capabilities, approach steps | `src/content/{experience,education,capabilities,approach}.yaml` |
+| Experience, education, capabilities, toolkit, approach steps | `src/content/{experience,education,capabilities,toolkit,approach}.yaml` |
 | About page text | `src/content/about.md` |
 | CV | `public/files/cv.pdf` |
 
 Each proof metric in `site.yaml` can name the case study behind it with `work: <filename without .md>`, and the home page links the figure there. The build fails if that case study doesn't exist or is a draft.
 
 The schemas are in `src/content.config.ts`. A build fails if a file doesn't match its schema. If you change a schema, change `public/admin/config.yml` to match. Entries in the YAML lists appear in file order.
+
+## Design
+
+[`DESIGN.md`](DESIGN.md) is the visual system: colours, type, components and the two scroll moments on the homepage (the work deck and the experience stack). Colour and spacing tokens live at the top of `src/styles/global.css`. Each experience entry can lead its card with a `highlight` number and label.
 
 ## Add a case study
 

@@ -1,31 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
 import Arrow from '../components/Arrow.astro';
+import CopyEmail from '../components/CopyEmail.astro';
 import NeighborField from '../components/NeighborField.astro';
 import PostRow from '../components/PostRow.astro';
 import SectionHead from '../components/SectionHead.astro';
 import Value from '../components/Value.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { getOrdered, getPosts, getSite, getWork } from '../lib/content';
+import { getOrdered, getPosts, getSite, getWork, showWriting as hasWriting } from '../lib/content';
 
 const site = await getSite();
 const work = await getWork();
 const featured = work.filter((entry) => entry.data.featured);
-// Each proof figure links to the case study behind it. A missing case study fails the build rather than shipping a broken link.
-const proof = site.proof_metrics.map((metric) => {
-  if (!metric.work) return { ...metric, entry: undefined };
-  const entry = work.find((item) => item.id === metric.work);
-  if (!entry) throw new Error(`site.yaml proof metric "${metric.value}" links to a case study that doesn't exist or is a draft: ${metric.work}`);
-  return { ...metric, entry };
+// Each proof figure says where it comes from: its case study, or a note with an optional link.
+// A missing case study fails the build rather than shipping a broken link.
+const proof = site.proof_metrics.map(({ value, label, work: slug, href, note }) => {
+  if (!slug) return { value, label, href, prefix: '', source: note };
+  const entry = work.find((item) => item.id === slug);
+  if (!entry) throw new Error(`site.yaml proof metric "${value}" links to a case study that doesn't exist or is a draft: ${slug}`);
+  return { value, label, href: `/work/${entry.id}/`, prefix: 'Case study: ', source: entry.data.short ?? entry.data.title };
 });
 const posts = (await getPosts()).slice(0, 3);
 const steps = await getOrdered('approach');
 const jobs = await getOrdered('experience');
 const capabilities = await getOrdered('capabilities');
+const toolkit = await getOrdered('toolkit');
 const linkedIn = site.socials.find((social) => social.label === 'LinkedIn');
 const { sections } = site;
-// One old post reads as an abandoned blog, so the section waits until there are at least two.
-const showWriting = posts.length >= 2;
+const showWriting = await hasWriting();
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -46,10 +48,14 @@ const jsonLd = {
 };
 ---
 <Base ogType="profile" jsonLd={jsonLd}>
-  <section class="hero">
+  <section class="hero band">
     <div class="wrap grid">
       <div class="hero-copy">
-        <p class="eyebrow">{site.eyebrow}</p>
+        <p class="eyebrow">
+          {site.eyebrow.split(' · ').map((part, i, parts) => (
+            <span class:list={{ 'eyebrow-tail': i > 0 && i === parts.length - 1 }}>{i > 0 && ' · '}{part}</span>
+          ))}
+        </p>
         <h1>{site.headline}</h1>
         <p class="hero-sub">{site.subheadline}</p>
         <div class="cta">
@@ -61,20 +67,23 @@ const jsonLd = {
     </div>
   </section>
 
+  <div class="stripe stripe--thin" aria-hidden="true"></div>
+
   <section class="proof" aria-label="Selected results">
     <ul class="wrap proof-list">
-      {proof.map(({ value, label, entry }) => (
+      {proof.map(({ value, label, href, prefix, source }) => (
         <li>
-          {entry ? (
-            <a class="proof-item" href={`/work/${entry.id}/`}>
+          {href ? (
+            <a class="proof-item" href={href}>
               <span class="proof-value"><Value value={value} /></span>
-              <span class="proof-label"><span class="link">{label}</span></span>
-              <span class="proof-more"><span class="visually-hidden">Case study: {entry.data.title}</span><Arrow /></span>
+              <span class="proof-label">{label}</span>
+              {source && <span class="proof-source">{prefix}<span class="link">{source}</span></span>}
             </a>
           ) : (
             <div class="proof-item">
               <span class="proof-value"><Value value={value} /></span>
               <span class="proof-label">{label}</span>
+              {source && <span class="proof-source proof-source--plain">{source}</span>}
             </div>
           )}
         </li>
@@ -82,13 +91,15 @@ const jsonLd = {
     </ul>
   </section>
 
-  <section class="section" id="work">
-    <div class="wrap">
-      <SectionHead {...sections.work}>
-        <a class="arrow-link" href="/work/"><span class="link">All work</span><Arrow /></a>
-      </SectionHead>
-      <div class="work-grid">
-        {featured.map((entry) => <WorkCard entry={entry} />)}
+  <section class="section deck" id="work" data-deck>
+    <div class="deck-track">
+      <div class="wrap deck-stage">
+        <SectionHead {...sections.work} reveal={false}>
+          <a class="arrow-link" href="/work/"><span class="link">All work</span><Arrow /></a>
+        </SectionHead>
+        <div class="work-grid">
+          {featured.map((entry) => <WorkCard entry={entry} />)}
+        </div>
       </div>
     </div>
   </section>
@@ -107,29 +118,41 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="section" id="experience">
-    <div class="wrap">
-      <SectionHead {...sections.experience} />
-      <div class="timeline reveal">
+  <section class="section" id="experience" data-stack-section style={`--stack-n: ${jobs.length}`}>
+    <div class="stack-track">
+      <div class="wrap stack-stage">
+      <SectionHead {...sections.experience} reveal={false} />
+      <div class="stack" data-stack>
         {jobs.map(({ data }) => (
-          <details class="job">
-            <summary class="grid">
-              <span class="job-dates">{data.dates}</span>
-              <div class="job-main">
-                <h3 class="job-employer">{data.employer}</h3>
-                <p class="job-role">{data.role}, {data.location}</p>
-                <p class="job-impact">{data.impact}</p>
+          <article class="stack-card">
+            <div class="stack-band band">
+              <div>
+                {data.highlight ? (
+                  <>
+                    <p class="stack-value"><Value value={data.highlight.value} /></p>
+                    <p class="stack-label">{data.highlight.label}</p>
+                  </>
+                ) : (
+                  <p class="stack-value">{data.employer}</p>
+                )}
               </div>
-              <span class="job-toggle" aria-hidden="true"></span>
-            </summary>
-            <div class="grid">
-              <div class="job-detail">
+              <span class="badge">{data.dates}</span>
+            </div>
+            <div class="stack-body">
+              <div class="stack-head">
+                <h3 class="stack-employer">{data.employer}</h3>
+                <span class="stack-role">{data.role}, {data.location}</span>
+              </div>
+              <p class="stack-impact">{data.impact}</p>
+              <details class="stack-more">
+                <summary>What I did</summary>
                 <ul>{data.details.map((line) => <li>{line}</li>)}</ul>
                 {data.url && <p><a class="link link--on" href={data.url} rel="noopener">Visit {data.employer}</a></p>}
-              </div>
+              </details>
             </div>
-          </details>
+          </article>
         ))}
+      </div>
       </div>
     </div>
   </section>
@@ -137,14 +160,23 @@ const jsonLd = {
   <section class="section" id="capabilities">
     <div class="wrap">
       <SectionHead {...sections.capabilities} />
-      <div class="cap-columns reveal">
-        {capabilities.map(({ data }) => (
+      <div class="cap2 reveal">
+        {capabilities.map(({ data }, i) => (
           <div>
+            <p class="cap2-n">{String(i + 1).padStart(2, '0')}</p>
             <h3>{data.title}</h3>
-            {data.summary && <p class="cap-summary">{data.summary}</p>}
+            {data.summary && <p class="cap2-sum">{data.summary}</p>}
             <ul>{data.lines.map((line) => <li>{line}</li>)}</ul>
           </div>
         ))}
+      </div>
+      <div class="kit reveal">
+        <p class="kit-title">Toolkit</p>
+        <dl>
+          {toolkit.map(({ data }) => (
+            <div class="kit-row"><dt>{data.area}</dt><dd>{data.tools.map((tool) => <span>{tool}</span>)}</dd></div>
+          ))}
+        </dl>
       </div>
     </div>
   </section>
@@ -162,14 +194,137 @@ const jsonLd = {
   </section>
   )}
 
-  <section class="section" id="contact">
+  <section class="section band contact" id="contact">
     <div class="wrap reveal">
       <h2 class="contact-title">{sections.contact.title}</h2>
       <p class="contact-lede">{sections.contact.lede}</p>
       <ul class="contact-links">
-        <li><a class="link link--on" href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li class="contact-email">
+          <a class="link link--on" href={`mailto:${site.email}`}>{site.email}</a>
+          <CopyEmail email={site.email} />
+        </li>
         {linkedIn && <li><a class="link link--on" href={linkedIn.url} rel="me noopener">LinkedIn</a></li>}
       </ul>
     </div>
   </section>
+
+  <script>
+    // Both effects pin their section and follow the scroll position, never a timer. Each switches off with reduced
+    // motion or when the window is too small, leaving an ordinary layout.
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const clamp = (v: number) => Math.min(1, Math.max(0, v));
+    const HEADER = 72;
+
+    // Selected work: the cards start stacked in the centre and deal out into a row of four.
+    const deck = document.querySelector<HTMLElement>('[data-deck]');
+    const track = deck?.querySelector<HTMLElement>('.deck-track');
+    const cards = deck ? [...deck.querySelectorAll<HTMLElement>('.work-card')] : [];
+    const roomy = () => innerWidth >= 1100 && innerHeight >= 720 && !reduce.matches && cards.length > 1;
+    let offsets: number[] = [];
+
+    function measureDeck() {
+      const on = roomy();
+      document.documentElement.classList.toggle('deck-on', on);
+      cards.forEach((card) => {
+        card.style.transform = '';
+        card.style.zIndex = '';
+        card.classList.remove('is-stacked');
+      });
+      if (!on) return;
+      const grid = cards[0].parentElement!.getBoundingClientRect();
+      const mid = grid.left + grid.width / 2;
+      offsets = cards.map((card) => {
+        const box = card.getBoundingClientRect();
+        return mid - (box.left + box.width / 2);
+      });
+      cards.forEach((card, i) => (card.style.zIndex = String(cards.length - i)));
+      updateDeck();
+    }
+
+    function updateDeck() {
+      if (!track || !document.documentElement.classList.contains('deck-on')) return;
+      const box = track.getBoundingClientRect();
+      const travel = box.height - (innerHeight - HEADER);
+      // Dealing runs from 8% to 84% of the pinned scroll, so the row rests briefly before the section moves on.
+      const dealt = ease(clamp((-(box.top - HEADER) / travel - 0.08) / 0.76));
+      const k = 1 - dealt;
+      cards.forEach((card, i) => {
+        const spin = (i - (cards.length - 1) / 2) * 4;
+        card.style.transform = `translate(${offsets[i] * k}px, ${i * 8 * k}px) rotate(${spin * k}deg) scale(${1 - 0.04 * k})`;
+        card.classList.toggle('is-stacked', k > 0.02);
+      });
+    }
+
+    // Experience: the section pins, and each card slides up from below and lands on the one before it, 16px lower,
+    // so the earlier cards' top edges stay visible. The page moves on only once the last card has landed.
+    const STEP = 16;
+    const stackSection = document.querySelector<HTMLElement>('[data-stack-section]');
+    const stackTrack = stackSection?.querySelector<HTMLElement>('.stack-track');
+    const stackStage = stackSection?.querySelector<HTMLElement>('.stack-stage');
+    const stackCards = stackSection ? [...stackSection.querySelectorAll<HTMLElement>('.stack-card')] : [];
+    const stackRoomy = () => innerWidth >= 760 && innerHeight >= 640 && !reduce.matches && stackCards.length > 1;
+
+    function measureStack() {
+      if (!stackSection || !stackStage) return;
+      const root = document.documentElement;
+      root.classList.toggle('stack-on', stackRoomy());
+      stackSection.style.removeProperty('--stack-card-h');
+      stackCards.forEach((card) => (card.style.transform = ''));
+      if (!root.classList.contains('stack-on')) return;
+      // The cards share one grid cell, so each already has the tallest card's height. Fixing it means opening
+      // "What I did" scrolls inside the card rather than resizing the whole stack.
+      stackSection.style.setProperty('--stack-card-h', `${stackCards[0].offsetHeight}px`);
+      // If the heading and the stack don't fit the pinned area, fall back to the plain list.
+      if (stackStage.scrollHeight > stackStage.clientHeight + 1) {
+        root.classList.remove('stack-on');
+        stackSection.style.removeProperty('--stack-card-h');
+        return;
+      }
+      updateStack();
+    }
+
+    function updateStack() {
+      if (!stackTrack || !document.documentElement.classList.contains('stack-on')) return;
+      const box = stackTrack.getBoundingClientRect();
+      const stageHeight = innerHeight - HEADER;
+      const travel = box.height - stageHeight;
+      // A short pause before the first card moves and after the last one lands, then one unit of scroll per card.
+      const lead = 0.15;
+      const rest = 0.25;
+      const units = lead + (stackCards.length - 1) + rest;
+      const u = clamp(-(box.top - HEADER) / travel) * units - lead;
+      stackCards.forEach((card, i) => {
+        const landed = i === 0 ? 1 : ease(clamp(u - (i - 1)));
+        card.style.transform = `translateY(${i * STEP + (1 - landed) * stageHeight}px)`;
+      });
+    }
+
+    let ticking = false;
+    addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateDeck();
+        updateStack();
+        ticking = false;
+      });
+    }, { passive: true });
+    const refresh = () => {
+      measureDeck();
+      measureStack();
+    };
+    addEventListener('resize', refresh);
+    reduce.addEventListener('change', refresh);
+    refresh();
+    // Safari can run this before layout settles: every work card then shares one centre and the deck never gathers,
+    // and the stack measures the wrong height. Measuring again whenever either block changes size (layout settling,
+    // fonts loading) fixes both. Transforms don't change a block's size, so this doesn't loop.
+    // Re-measuring happens on the next frame, outside the observer callback, so it can't trigger an observer loop.
+    const later = (fn: () => void) => () => requestAnimationFrame(fn);
+    const grid = cards[0]?.parentElement;
+    if (grid) new ResizeObserver(later(measureDeck)).observe(grid);
+    const stackList = stackCards[0]?.parentElement;
+    if (stackList) new ResizeObserver(later(measureStack)).observe(stackList);
+  </script>
 </Base>

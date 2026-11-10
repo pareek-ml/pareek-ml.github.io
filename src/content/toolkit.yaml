@@ -1,0 +1,8 @@
+# The tools behind "What I bring", grouped by area. Each tool shows as a pill and never wraps.
+items:
+  - { id: agents, area: Agents and retrieval, tools: [RAG, MCP, LangGraph, Google ADK] }
+  - { id: models, area: Models, tools: [PyTorch, Hugging Face, vLLM, Prophet] }
+  - { id: data, area: Data and search, tools: [Weaviate, Qdrant, BM25, SQL Server, Databricks] }
+  - { id: delivery, area: Delivery and cloud, tools: [Docker, Kubernetes, CI/CD, FastAPI, Azure, AWS, GCP] }
+  - { id: governance, area: Governance, tools: [EU AI Act, GDPR, Langfuse, DeepEval, RAGAS, MLflow, "Weights & Biases", Grafana] }
+  - { id: languages, area: Languages, tools: [Python, SQL, TypeScript, C++] }

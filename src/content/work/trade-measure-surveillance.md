@@ -1,9 +1,10 @@
 ---
 title: Monitoring the world's new trade measures continuously, not by hand
-client: International organization, Geneva
+short: Trade-measure monitoring
+client: World Trade Organization, Geneva
 sector: Public sector · Trade policy
 tags: [Multi-agent systems, Information extraction, Cost optimization]
-summary: An international organization now tracks new tariffs, export restrictions and subsidies across 16+ sources automatically, at 17% lower AI running cost, with analysts reviewing findings instead of hunting for them.
+summary: The World Trade Organization now tracks new tariffs, export restrictions and subsidies across 16+ sources automatically, with 17% lower AI model usage, and analysts review findings instead of hunting for them.
 metrics:
   - value: "16+"
     label: sources monitored continuously
@@ -45,4 +46,4 @@ The system works like a series of increasingly expensive checkpoints, so costly 
 
 ## Coverage now grows by adding sources, not people
 
-The organization monitors 16+ sources continuously and can add more without adding headcount. Removing duplicates up front cut AI model usage by 17%, and every record arrives with its source, so analysts can confirm it in seconds. The team's time has moved from searching for measures to judging them, which is where its expertise matters most.
+The WTO monitors 16+ sources continuously and can add more without adding headcount. Removing duplicates up front cut AI model usage by 17%, and every record arrives with its source, so analysts can confirm it in seconds. The team's time has moved from searching for measures to judging them, which is where its expertise matters most.

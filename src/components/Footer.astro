@@ -1,10 +1,19 @@
 ---
 import { getSite } from '../lib/content';
+import { lastUpdated } from '../lib/updated';
+
 const site = await getSite();
+const zone = 'Europe/Zurich';
+const updatedLabel = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric', timeZone: zone }).format(lastUpdated);
+const updatedIso = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', timeZone: zone }).format(lastUpdated);
 ---
+<div class="stripe" aria-hidden="true"></div>
 <footer class="site-footer">
   <div class="wrap footer-row">
-    <p>© {new Date().getFullYear()} {site.name}. {site.location}.</p>
+    <div class="footer-meta">
+      <p>© {lastUpdated.getFullYear()} {site.name}. {site.location}.</p>
+      <p>Last updated <time datetime={updatedIso}>{updatedLabel}</time></p>
+    </div>
     <ul class="footer-links">
       {site.socials.map(({ label, url }) => (
         <li><a class="link" href={url} rel="me noopener">{label}</a></li>

@@ -2,7 +2,7 @@ import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 
 const published = ({ data }: { data: { draft: boolean } }) => import.meta.env.DEV || !data.draft;
 
-export async function getOrdered<T extends 'experience' | 'education' | 'capabilities' | 'approach'>(name: T) {
+export async function getOrdered<T extends 'experience' | 'education' | 'capabilities' | 'toolkit' | 'approach'>(name: T) {
   const entries = await getCollection(name);
   return entries.sort((a, b) => a.data.order - b.data.order);
 }
@@ -21,6 +21,12 @@ export async function getWork() {
 export async function getPosts() {
   const entries = await getCollection('writing', published);
   return entries.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}
+
+/** One old post reads as an abandoned blog, so Writing stays out of the menu and off the homepage until there are two. */
+export const WRITING_MIN_POSTS = 2;
+export async function showWriting() {
+  return (await getPosts()).length >= WRITING_MIN_POSTS;
 }
 
 /** A post with no body lives only at its external URL and gets no page here. */

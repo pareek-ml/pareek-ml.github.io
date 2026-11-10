@@ -1,21 +1,29 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Arrow from './Arrow.astro';
+import Value from './Value.astro';
 
 const { entry, level = 'h3' } = Astro.props as { entry: CollectionEntry<'work'>; level?: 'h2' | 'h3' };
 const { title, sector, summary, metrics } = entry.data;
+const [lead, second] = metrics;
 const Heading = level;
 ---
 <article class="work-card reveal">
-  <p class="work-sector">{sector}</p>
-  <Heading class="work-title"><a class="link" href={`/work/${entry.id}/`}>{title}</a></Heading>
-  <p class="work-summary">{summary}</p>
-  {metrics.length > 0 && (
-    <dl class="work-metrics">
-      {metrics.slice(0, 2).map(({ value, label }) => (
-        <div><dt>{label}</dt><dd>{value}</dd></div>
-      ))}
-    </dl>
+  {lead && (
+    <div class="work-band band">
+      <p class="work-band-value"><Value value={lead.value} /></p>
+      <p class="work-band-label">{lead.label}</p>
+    </div>
   )}
-  <div class="work-card-end"><Arrow /></div>
+  <div class="work-body">
+    <p class="work-sector">{sector}</p>
+    <Heading class="work-title"><a class="link" href={`/work/${entry.id}/`}>{title}</a></Heading>
+    <p class="work-summary">{summary}</p>
+    {second && (
+      <dl class="work-metrics">
+        <div><dt>{second.label}</dt><dd><Value value={second.value} /></dd></div>
+      </dl>
+    )}
+    <div class="work-card-end"><Arrow /></div>
+  </div>
 </article>
