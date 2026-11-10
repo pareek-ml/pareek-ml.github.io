@@ -29,16 +29,16 @@ collections:
     sortable_fields: [order, title]
     summary: "{{order}}. {{title}}"
     fields:
-      - { name: title, label: Title, widget: string }
+      - { name: title, label: Title, widget: string, hint: "The outcome, not the technology, e.g. 'Classifying products into customs codes in under three seconds'." }
       - { name: client, label: Client, widget: string, hint: "Anonymize freely, e.g. 'European logistics group'." }
       - { name: sector, label: Sector, widget: string }
       - { name: tags, label: Tags, widget: list, required: false }
-      - { name: summary, label: One-line summary, widget: string }
+      - { name: summary, label: One-line summary, widget: string, hint: "The answer first: who, what changed for them, and the headline number." }
       - name: metrics
         label: Metrics
         widget: list
         required: false
-        hint: Cards show the first two.
+        hint: "Cards show the first two. Outcomes a client cares about (scale, cost, speed, trust), stated in plain words. No model metrics or headcount."
         fields:
           - { name: value, label: Value, widget: string }
           - { name: label, label: Label, widget: string }
@@ -72,18 +72,14 @@ collections:
         label: Body
         widget: markdown
         default: |
-          ## Context
+          ## [Situation: one sentence on what the client faced]
 
-          ## Challenge
+          ## [Complication: one sentence on why the obvious fix would not work]
 
-          ## Approach
+          ## [Resolution: one sentence on what we built, in business terms]
 
-          ## Impact
-
-          ## Architecture
-
-          ## What I'd do next
-        hint: Remove any section you have nothing to say about.
+          ## [Impact: one sentence on what is now different for the client]
+        hint: "Four sections, always in this order. Each heading is a full sentence a reader could skim on its own. Keep tools in Tags, not the body. No next steps, team sizes or FTE figures. See CASE-STUDY-STYLE.md."
 
   - name: writing
     label: Writing

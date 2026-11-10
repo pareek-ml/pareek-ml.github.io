@@ -34,11 +34,11 @@ Create `src/content/work/my-project.md`. The filename becomes the URL: `/work/my
 
 ```md
 ---
-title: Claims triage for a European insurer
+title: Cutting claims triage time for a European insurer   # The outcome, not the technology
 client: European insurer           # Anonymize as needed
 sector: Insurance
 tags: [RAG, Evaluation]
-summary: One line for cards and the top of the page.
+summary: The answer first. Who, what changed for them, and the headline number.
 metrics:                           # Optional. Cards show the first two.
   - { value: 40%, label: faster triage }
 order: 7                           # Sets the position on /work/ and previous/next
@@ -49,25 +49,23 @@ links:                             # Optional
 exhibit:                           # Optional business exhibit
   image: ../../assets/work/my-project/exhibit.png
   alt: What the chart shows, for screen readers.
-  caption: What the reader should take from it.
+  caption: The finding it proves, as a full sentence.
 architecture:                      # Optional architecture diagram
   image: ../../assets/work/my-project/architecture.png
   alt: What the diagram shows, for screen readers.
-  caption: What the reader should take from it.
+  caption: The finding it proves, as a full sentence.
 ---
 
-## Context
+## Situation: one sentence on what the client faced
 
-## Challenge
+## Complication: one sentence on why the obvious fix would not work
 
-## Approach
+## Resolution: one sentence on what we built, in business terms
 
-## Impact
-
-## Architecture
-
-## What I'd do next
+## Impact: one sentence on what is now different for the client
 ```
+
+Every case study uses these four sections in this order, and each heading is a full sentence that makes its point on its own. [`CASE-STUDY-STYLE.md`](CASE-STUDY-STYLE.md) has the full rules, including what to leave out.
 
 A figure with no image stays off the page, so you can hold a place for one:
 
@@ -78,7 +76,7 @@ exhibit:
 
 When you add the image, also add `alt` and replace the caption. The build fails if an image has no alt text or still has a TODO caption.
 
-Put images in `src/assets/work/my-project/`. Astro optimizes them and sets their dimensions at build time. Remove any body section you have nothing to say about.
+Put images in `src/assets/work/my-project/`. Astro optimizes them and sets their dimensions at build time.
 
 The exhibit appears above the body and the architecture diagram below it. Other images can go anywhere in the body as `![Alt text](../../assets/work/my-project/chart.png)`.
 

@@ -1,53 +1,48 @@
 ---
-title: Agentic surveillance of global trade measures
+title: Monitoring the world's new trade measures continuously, not by hand
 client: International organization, Geneva
 sector: Public sector · Trade policy
 tags: [Multi-agent systems, Information extraction, Cost optimization]
-summary: A multi-agent pipeline that monitors 16+ public sources for new trade measures, extracts them into structured records, and frees about two FTE of analyst effort every month.
+summary: An international organization now tracks new tariffs, export restrictions and subsidies across 16+ sources automatically, at 17% lower AI running cost, with analysts reviewing findings instead of hunting for them.
 metrics:
   - value: "16+"
     label: sources monitored continuously
   - value: "17%"
-    label: fewer LLM tokens through deduplication
-  - value: "~2 FTE"
-    label: of analyst effort freed per month
+    label: lower AI model usage, by removing duplicates first
+  - value: "100%"
+    label: of records traceable to their original source
 order: 1
 featured: true
 draft: false
 links: []
 exhibit:
-  caption: "TODO: monthly analyst effort and token consumption, before and after"
+  caption: "TODO: Duplicates are removed before any AI model runs, cutting model usage by 17%"
 architecture:
-  caption: "TODO: pipeline diagram (sources → scrapers → normalize and hash → triage → extraction → analyst review → database)"
+  caption: "TODO: Each item passes four filters before an analyst sees it: collect, deduplicate, triage, extract"
 ---
 
-## Context
+## Trade measures were tracked by hand, across a growing number of sources
 
-Governments announce new trade measures (tariffs, export restrictions, subsidies, licensing rules) across official gazettes, ministry sites, news outlets and media in many languages. Analysts tracked these sources by hand, which was slow, uneven in coverage and hard to scale as the volume of announcements grew.
+Governments announce new trade measures (tariffs, export restrictions, subsidies, licensing rules) in official gazettes, on ministry websites and through the press, in many languages. Analysts were finding them by reading these sources one by one. Coverage depended on who had time that week, and every new source meant more manual reading.
 
-## Challenge
+## Automating the search was not enough on its own
 
-- Coverage: heterogeneous sources, each with its own format and publishing rhythm.
-- Signal-to-noise: most content is not a trade measure, so feeding everything to a large model is expensive and floods analysts with false positives.
-- Repetition: the same measure is reported by many outlets, often word for word, which multiplies cost and creates duplicate records.
-- Trust: extracted records feed policy monitoring, so every field has to trace back to its source.
+Three things made a simple "send everything to an AI model" approach unworkable:
 
-## Approach
+- **Most content is noise.** The large majority of what gets published is not a trade measure. Processing all of it would be expensive and would bury analysts in false alarms.
+- **The same news appears many times.** One measure is reported by dozens of outlets, often word for word, which multiplies both cost and duplicate records.
+- **Every record has to stand up to scrutiny.** The output feeds policy monitoring, so each finding must point back to where it came from.
 
-1. **Collect.** Scraping agents gather new content from public, government, news and media sources on a schedule.
-2. **Deduplicate before spending.** Each item is normalized and hashed. Content already seen is dropped before any model call, so the expensive steps only run on genuinely new material.
-3. **Triage.** A classification step decides whether an item describes a trade measure, routing only relevant items onward.
-4. **Extract.** An extraction agent turns each relevant item into a structured record (measure type, implementing country, products affected, dates, source) against a fixed schema.
-5. **Review.** Records reach analysts with their source attached, so a person confirms the output instead of compiling it.
+## We built a pipeline that filters before it spends
 
-## Impact
+The system works like a series of increasingly expensive checkpoints, so costly steps only run on material that has earned them:
 
-- 16+ sources monitored continuously, with coverage that grows by adding a source rather than adding headcount.
-- 17% fewer LLM tokens consumed, because duplicates are removed before inference.
-- About two FTE of analyst effort freed every month, shifting the team from searching for measures to validating them.
+1. **Collect** new content from public, government and news sources on a schedule.
+2. **Remove duplicates** before any AI model is involved, so the same story is never paid for twice.
+3. **Triage** each item and pass on only those that describe a trade measure.
+4. **Extract** the essentials (measure type, country, products, dates) into a standard record, with the source attached.
+5. **Hand to analysts** for confirmation, so people validate findings rather than compile them.
 
-## What I'd do next
+## Coverage now grows by adding sources, not people
 
-- Add near-duplicate detection (embedding similarity) to catch paraphrased reports that exact hashing misses, pushing token savings further.
-- Feed analyst corrections back into triage and extraction to improve precision over time.
-- Extend coverage to additional languages and source types.
+The organization monitors 16+ sources continuously and can add more without adding headcount. Removing duplicates up front cut AI model usage by 17%, and every record arrives with its source, so analysts can confirm it in seconds. The team's time has moved from searching for measures to judging them, which is where its expertise matters most.

@@ -6,12 +6,12 @@ subheadline: AI engineer at the World Trade Organization. I scope problems with 
 description: AI Engineer building enterprise AI agents, RAG pipelines, and workflow automation. Currently at the World Trade Organisation, Geneva.
 location: Geneva, Switzerland
 proof_metrics:
-  - value: "~2 FTE"
-    label: of analyst effort freed every month
+  - value: "16+"
+    label: trade sources monitored continuously, without added headcount
   - value: 100%
-    label: of AI traces logged and auditable
-  - value: "0.97"
-    label: recall@5 on HS code recommendation
+    label: of AI activity logged and auditable
+  - value: "97%"
+    label: of customs-code searches with the right answer in the top five
 email: ml.ypareek@gmail.com
 socials:
   - label: LinkedIn

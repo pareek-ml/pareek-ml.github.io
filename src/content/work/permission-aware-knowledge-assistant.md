@@ -1,49 +1,43 @@
 ---
-title: A knowledge assistant that respects who can see what
+title: A knowledge assistant that only shows staff what they are cleared to see
 client: International organization, Geneva
 sector: Public sector · Knowledge management
 tags: [Agentic RAG, Access control, Hybrid search]
-summary: An agentic chat assistant over 5,400+ internal documents that only retrieves what each user is allowed to see, and is calibrated so long documents don't crowd out short ones.
+summary: Staff can now ask questions across 5,400+ internal documents and get cited answers, with access rules enforced on every query and short, relevant notes no longer buried under 500-page reports.
 metrics:
   - value: "5,400+"
-    label: documents indexed
-  - value: "5–530"
-    label: pages per document, rebalanced in retrieval
+    label: internal documents searchable through one assistant
+  - value: "100%"
+    label: of queries checked against the user's access rights
 order: 4
 featured: false
 draft: false
 links: []
 exhibit:
-  caption: "TODO: share of results per document, before and after recalibration"
+  caption: "TODO: After rebalancing, long reports no longer crowd short, relevant notes out of the results"
 architecture:
-  caption: "TODO: query flow (user → access scope → metadata filter → hybrid search → length recalibration → agent → cited answer)"
+  caption: "TODO: Access rights are checked before anything is searched, so the assistant never sees what the user cannot"
 ---
 
-## Context
+## Staff needed answers from thousands of internal documents
 
-Staff needed fast answers from a large body of internal documents. A generic chatbot was not an option: documents carry different access levels, and an assistant that leaks content to the wrong person is worse than none.
+The organization's knowledge sits in more than 5,400 internal documents, from short notes to reports of several hundred pages. Staff were spending time searching for answers that already existed. An off-the-shelf chatbot was ruled out for one reason: documents carry different access levels, and an assistant that shows content to the wrong person is worse than no assistant at all.
 
-## Challenge
+## Search had to be secure, precise, and fair to short documents
 
-- Access control had to be enforced at retrieval time, for every query.
-- Questions mix exact terms (names, references, codes) with conceptual questions, so no single search method was enough.
-- The corpus ranged from 5-page notes to 530-page reports. A long document produces far more chunks, so left alone it dominates results simply by being long.
+- **Access first.** Permissions had to be enforced on every single question, not checked after the fact.
+- **Two kinds of question.** Staff ask both for exact items (names, references, codes) and for broader concepts, and no single search method handles both well.
+- **Length bias.** Long reports produce far more searchable text than short notes, so left alone they dominate the results simply by being long, not by being relevant.
 
-## Approach
+## We built an assistant that checks permissions before it searches
 
-1. **Scope by user.** Each query is filtered by the user's access scope before retrieval, so the model never sees content the user cannot.
-2. **Filter by metadata.** Users and the agent can narrow results by document type, date, source and other attributes.
-3. **Search two ways.** Lexical search catches exact terms; semantic search catches meaning. Results are combined.
-4. **Chunk by meaning.** Semantic chunking keeps sections intact, so retrieved passages are self-contained.
-5. **Recalibrate for document length.** Rebalanced retrieval so no single long document over-appears in results, keeping answers drawn from the most relevant sources rather than the biggest ones.
-6. **Answer agentically.** The assistant decides when to search, refine and cite, rather than running a single fixed retrieval.
+- **Scoped every query to the user.** Each question is limited to the documents that person may see before any search runs, so the assistant never reads what the user cannot.
+- **Let people narrow the field.** Users can filter by document type, date, source and other attributes.
+- **Searched two ways at once.** Exact-term search and meaning-based search run together, and their results are combined.
+- **Kept passages whole.** Documents are split along their natural sections, so each answer draws on complete, self-contained passages.
+- **Levelled the field.** Results are rebalanced so a single long report cannot crowd out a short note that answers the question better.
+- **Let the assistant work like a researcher.** It decides when to search again, refine the question, and cite its sources.
 
-## Impact
+## Staff get cited answers in one place, without new access risk
 
-- 5,400+ documents searchable through a single assistant, with access rules enforced on every query.
-- Balanced retrieval across documents from 5 to 530 pages, so short but relevant sources are not drowned out.
-
-## What I'd do next
-
-- Add an evaluation set built from real user questions.
-- Surface usage analytics to show which content is most needed.
+More than 5,400 documents are now searchable through a single assistant, with access rules applied to every query. Answers cite their sources, so staff can verify them. Short but relevant documents now surface alongside long reports, so answers come from the best source rather than the biggest one.
