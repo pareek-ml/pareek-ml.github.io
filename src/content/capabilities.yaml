@@ -1,23 +1,26 @@
 items:
   - id: strategy
     title: Strategy
+    summary: Find where AI pays back, and where it won't.
     lines:
-      - Enterprise AI agents and workflow automation in sensitive environments
+      - Prioritizing AI agents and workflow automation in sensitive environments
+      - Model selection on benchmarks, not reputation
       - Demand forecasting and dynamic pricing
-      - On-premise LLM benchmarking with AIPerf
       - End-user training, handoff and adoption
   - id: engineering
     title: Engineering
+    summary: Build systems that run in production, on infrastructure the client controls.
     lines:
-      - LLM APIs, RAG pipelines, LLM fine-tuning, MCP and Google ADK
-      - PyTorch, JAX, HuggingFace Transformers, LangChain, LangGraph and vLLM
-      - Chroma, Qdrant, BM25, semantic search, SQL Server and Databricks
-      - Docker, Kubernetes, GitHub Actions (CI/CD), REST APIs, FastAPI, Git and on-premise deployment
-      - Python, C++, SQL and TypeScript
+      - "Agents and retrieval: RAG, MCP, LangGraph, Google ADK"
+      - "Models: PyTorch, Hugging Face, vLLM, fine-tuning"
+      - "Data and search: Weaviate, Qdrant, Chroma, BM25, SQL Server, Databricks"
+      - "Delivery: Docker, Kubernetes, CI/CD, FastAPI, on-premises deployment"
+      - "Languages: Python, C++, SQL, TypeScript"
   - id: governance
     title: Governance
+    summary: Make AI auditable and safe to scale.
     lines:
-      - EU AI Act, GDPR, DLP policies and data residency
-      - LLM evaluation with DeepEval and RAGAS
-      - MLOps with MLflow, Weights & Biases and Grafana
-      - Drift monitoring and selective retraining
+      - "Regulation: EU AI Act, GDPR, data residency"
+      - "Evaluation: DeepEval, RAGAS"
+      - "Monitoring: Langfuse, MLflow, Weights & Biases, Grafana"
+      - Drift detection and selective retraining

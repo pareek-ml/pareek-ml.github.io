@@ -1,9 +1,9 @@
 name: Yash Pareek
 role: AI Engineer
-eyebrow: Enterprise AI · Geneva
-headline: Enterprise AI that holds up in production, and in an audit.
-subheadline: AI engineer at the World Trade Organization. I scope problems with the people who own them, build multi-agent and retrieval systems on sovereign infrastructure, and put the governance in place to run them responsibly.
-description: AI Engineer building enterprise AI agents, RAG pipelines, and workflow automation. Currently at the World Trade Organisation, Geneva.
+eyebrow: AI Engineer · World Trade Organization · Geneva
+headline: AI that holds up in production, and in an audit.
+subheadline: I work with the people who own a problem to find where AI pays back, build it on infrastructure they control, and put the governance in place to run it safely.
+description: AI Engineer at the World Trade Organization in Geneva, taking AI from pilot to production, on sovereign infrastructure and with governance built in.
 location: Geneva, Switzerland
 proof_metrics:
   - value: "16+"
@@ -12,6 +12,25 @@ proof_metrics:
     label: of AI activity logged and auditable
   - value: "97%"
     label: of customs-code searches with the right answer in the top five
+sections:
+  work:
+    kicker: Selected work
+    title: Four AI systems now in production at an international organization
+  approach:
+    kicker: How I work
+    title: I start from the decision a system has to support, not from the model
+  experience:
+    kicker: Experience
+    title: Shipping AI to real users since 2022, from airport travellers to member governments
+  capabilities:
+    kicker: What I bring
+    title: Strategy, engineering and governance, so a system can be justified, built and trusted
+  writing:
+    kicker: Writing
+    title: Notes from building AI in production
+  contact:
+    title: Let's talk.
+    lede: Whether you are deciding where AI fits or need a system that will hold up in an audit, email is the fastest way to reach me.
 email: ml.ypareek@gmail.com
 socials:
   - label: LinkedIn

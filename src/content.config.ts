@@ -82,13 +82,16 @@ const education = defineCollection({
 
 const capabilities = defineCollection({
   loader: file('src/content/capabilities.yaml', { parser: items }),
-  schema: z.object({ order: z.number(), title: z.string(), lines: z.array(z.string()) }),
+  schema: z.object({ order: z.number(), title: z.string(), summary: z.string().optional(), lines: z.array(z.string()) }),
 });
 
 const approach = defineCollection({
   loader: file('src/content/approach.yaml', { parser: items }),
   schema: z.object({ order: z.number(), title: z.string(), outcome: z.string() }),
 });
+
+/** Each homepage section has a short label and an action title: a full sentence that makes the section's point. */
+const sectionHead = z.object({ kicker: z.string(), title: z.string() });
 
 const site = defineCollection({
   loader: file('src/content/site.yaml', {
@@ -103,6 +106,14 @@ const site = defineCollection({
     description: z.string(),
     location: z.string(),
     proof_metrics: z.array(metric).length(3),
+    sections: z.object({
+      work: sectionHead,
+      approach: sectionHead,
+      experience: sectionHead,
+      capabilities: sectionHead,
+      writing: sectionHead,
+      contact: z.object({ title: z.string(), lede: z.string() }),
+    }),
     email: z.email(),
     socials: z.array(z.object({ label: z.string(), url: z.url() })),
     cv: z.string(),

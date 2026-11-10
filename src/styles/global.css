@@ -124,6 +124,8 @@ img { height: auto; }
   letter-spacing: -0.01em;
   text-wrap: balance;
 }
+.section-kicker { margin-bottom: 14px; color: var(--accent); font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+.section-head .section-title { max-width: 24em; }
 .section-head {
   display: flex;
   flex-wrap: wrap;
@@ -303,7 +305,7 @@ a { color: inherit; }
 }
 
 /* Experience */
-.timeline { border-bottom: 1px solid var(--hairline); }
+.timeline { max-width: 880px; border-bottom: 1px solid var(--hairline); }
 .job { border-top: 1px solid var(--hairline); }
 .job summary {
   display: grid;
@@ -333,6 +335,7 @@ a { color: inherit; }
 /* Capabilities */
 .cap-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 48px; }
 .cap-columns h3 { padding-bottom: 14px; border-bottom: 1px solid var(--hairline); font: 400 26px/1.2 var(--serif); }
+.cap-summary { margin-top: 14px; font: 400 20px/1.35 var(--serif); }
 .cap-columns li { margin-top: 14px; color: var(--muted); font-size: 16px; line-height: 1.55; }
 @media (max-width: 860px) {
   .cap-columns { grid-template-columns: 1fr; row-gap: 40px; }

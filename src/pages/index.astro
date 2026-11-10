@@ -13,6 +13,9 @@ const steps = await getOrdered('approach');
 const jobs = await getOrdered('experience');
 const capabilities = await getOrdered('capabilities');
 const linkedIn = site.socials.find((social) => social.label === 'LinkedIn');
+const { sections } = site;
+// One old post reads as an abandoned blog, so the section waits until there are at least two.
+const showWriting = posts.length >= 2;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -62,7 +65,10 @@ const jsonLd = {
   <section class="section" id="work">
     <div class="wrap">
       <div class="section-head reveal">
-        <h2 class="section-title">Selected work</h2>
+        <div>
+          <p class="section-kicker">{sections.work.kicker}</p>
+          <h2 class="section-title">{sections.work.title}</h2>
+        </div>
         <a class="arrow-link" href="/work/"><span class="link">All work</span><Arrow /></a>
       </div>
       <div class="work-grid">
@@ -73,7 +79,7 @@ const jsonLd = {
 
   <section class="section" id="approach">
     <div class="wrap">
-      <div class="section-head reveal"><h2 class="section-title">Approach</h2></div>
+      <div class="section-head reveal"><div><p class="section-kicker">{sections.approach.kicker}</p><h2 class="section-title">{sections.approach.title}</h2></div></div>
       <ol class="steps reveal">
         {steps.map(({ data }) => (
           <li class="step">
@@ -85,25 +91,10 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="section" id="writing">
-    <div class="wrap grid">
-      <div class="split-side sticky reveal">
-        <h2 class="section-title">Writing</h2>
-      </div>
-      <div class="split-main reveal">
-        <div class="posts">
-          {posts.map((post) => <PostRow post={post} />)}
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section" id="experience">
-    <div class="wrap grid">
-      <div class="split-side sticky reveal">
-        <h2 class="section-title">Experience</h2>
-      </div>
-      <div class="split-main timeline reveal">
+    <div class="wrap">
+      <div class="section-head reveal"><div><p class="section-kicker">{sections.experience.kicker}</p><h2 class="section-title">{sections.experience.title}</h2></div></div>
+      <div class="timeline reveal">
         {jobs.map(({ data }) => (
           <details class="job">
             <summary>
@@ -129,11 +120,12 @@ const jsonLd = {
 
   <section class="section" id="capabilities">
     <div class="wrap">
-      <div class="section-head reveal"><h2 class="section-title">Capabilities</h2></div>
+      <div class="section-head reveal"><div><p class="section-kicker">{sections.capabilities.kicker}</p><h2 class="section-title">{sections.capabilities.title}</h2></div></div>
       <div class="cap-columns reveal">
         {capabilities.map(({ data }) => (
           <div>
             <h3>{data.title}</h3>
+            {data.summary && <p class="cap-summary">{data.summary}</p>}
             <ul>{data.lines.map((line) => <li>{line}</li>)}</ul>
           </div>
         ))}
@@ -141,10 +133,23 @@ const jsonLd = {
     </div>
   </section>
 
+  {showWriting && (
+  <section class="section" id="writing">
+    <div class="wrap">
+      <div class="section-head reveal"><div><p class="section-kicker">{sections.writing.kicker}</p><h2 class="section-title">{sections.writing.title}</h2></div></div>
+      <div class="reveal">
+        <div class="posts">
+          {posts.map((post) => <PostRow post={post} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+  )}
+
   <section class="section" id="contact">
     <div class="wrap reveal">
-      <h2 class="contact-title">Let's talk.</h2>
-      <p class="contact-lede">The fastest way to reach me is email. I read everything and reply quickly.</p>
+      <h2 class="contact-title">{sections.contact.title}</h2>
+      <p class="contact-lede">{sections.contact.lede}</p>
       <ul class="contact-links">
         <li><a class="link link--on" href={`mailto:${site.email}`}>{site.email}</a></li>
         {linkedIn && <li><a class="link link--on" href={linkedIn.url} rel="me noopener">LinkedIn</a></li>}
